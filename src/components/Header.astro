@@ -15,9 +15,9 @@ const navItems = [
 ];
 ---
 
-<header class="floating-header-wrapper">
-  <div class="floating-pill-nav">
-    <!-- Brand Logo -->
+<header class="site-header-wrapper">
+  <div class="header-pill">
+    <!-- Left: Brand Logo -->
     <a href="/" class="brand-logo-link" aria-label="机场智选首页">
       <div class="brand-logo-badge">
         <svg class="airplane-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -32,30 +32,32 @@ const navItems = [
       </div>
     </a>
 
-    <!-- Desktop Nav Links -->
-    <nav class="desktop-nav-links" aria-label="主导航">
-      {navItems.map(item => {
-        const isActive = (item.href === '/' && currentPath === '/') || 
-                         (item.href !== '/' && item.href !== '/#faq' && currentPath.startsWith(item.href));
-        return (
-          <a
-            href={item.href}
-            class={`nav-pill-item ${isActive ? 'nav-pill-active' : ''}`}
-          >
-            {item.name}
-          </a>
-        );
-      })}
+    <!-- Center: Desktop Nav Links (Centered) -->
+    <nav class="desktop-nav-center" aria-label="主导航">
+      <div class="nav-links-pill-box">
+        {navItems.map(item => {
+          const isActive = (item.href === '/' && currentPath === '/') || 
+                           (item.href !== '/' && item.href !== '/#faq' && currentPath.startsWith(item.href));
+          return (
+            <a
+              href={item.href}
+              class={`nav-pill-item ${isActive ? 'nav-pill-active' : ''}`}
+            >
+              {item.name}
+            </a>
+          );
+        })}
+      </div>
     </nav>
 
-    <!-- Right Actions: Tools, Search & Mobile Toggle -->
+    <!-- Right: Actions (Desktop: CTA + Search, Mobile: Search + Menu) -->
     <div class="nav-right-actions">
       <a
         href="/smart-match/"
         class="nav-quick-cta"
-        title="快速进入智能选机场"
+        title="进入智能选机场"
       >
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
           <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
         </svg>
         <span>智能选购</span>
@@ -67,7 +69,7 @@ const navItems = [
         class="search-icon-btn"
         title="搜索机场与套餐"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
         </svg>
@@ -115,38 +117,40 @@ const navItems = [
 </header>
 
 <style>
-  .floating-header-wrapper {
+  .site-header-wrapper {
     position: sticky;
     top: 14px;
     z-index: 1000;
     width: 100%;
     max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* Reasonable spacing between floating nav and hero */
+    margin-bottom: 24px;
   }
 
-  .floating-pill-nav {
+  .header-pill {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
-    padding: 0 14px 0 18px;
-    background: rgba(255, 255, 255, 0.88);
+    height: 64px;
+    padding: 0 16px 0 20px;
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(220, 231, 236, 0.85);
     border-radius: 9999px;
-    box-shadow: 0 8px 30px rgba(16, 45, 70, 0.06);
+    box-shadow: 0 4px 24px rgba(16, 45, 70, 0.05);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .floating-pill-nav:hover {
-    box-shadow: 0 12px 36px rgba(16, 45, 70, 0.1);
-    border-color: rgba(16, 184, 154, 0.35);
+  .header-pill:hover {
+    box-shadow: 0 8px 30px rgba(16, 45, 70, 0.08);
+    border-color: rgba(16, 184, 154, 0.3);
   }
 
+  /* Left: Brand Logo */
   .brand-logo-link {
     display: flex;
     align-items: center;
@@ -156,15 +160,15 @@ const navItems = [
   }
 
   .brand-logo-badge {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 10px;
     background: #E4F0F6;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #10B89A;
-    transition: transform 0.25s ease;
+    transition: all 0.25s ease;
   }
 
   .brand-logo-link:hover .brand-logo-badge {
@@ -174,25 +178,25 @@ const navItems = [
   }
 
   .airplane-icon {
-    width: 18px;
-    height: 18px;
+    width: 19px;
+    height: 19px;
   }
 
   .brand-text-col {
     display: flex;
     flex-direction: column;
-    line-height: 1.15;
+    line-height: 1.18;
   }
 
   .brand-title {
-    font-size: 15px;
+    font-size: 15.5px;
     font-weight: 800;
     color: #102D46;
     letter-spacing: -0.01em;
   }
 
   .brand-sub {
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 500;
     color: #647B8C;
   }
@@ -204,14 +208,22 @@ const navItems = [
     letter-spacing: 0.02em;
   }
 
-  .desktop-nav-links {
+  /* Center: Nav links */
+  .desktop-nav-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 16px;
+  }
+
+  .nav-links-pill-box {
     display: flex;
     align-items: center;
     gap: 4px;
-    background: rgba(244, 249, 252, 0.7);
+    background: rgba(244, 249, 252, 0.75);
     padding: 4px 6px;
     border-radius: 9999px;
-    border: 1px solid rgba(220, 231, 236, 0.6);
+    border: 1px solid rgba(220, 231, 236, 0.65);
   }
 
   .nav-pill-item {
@@ -227,7 +239,7 @@ const navItems = [
 
   .nav-pill-item:hover {
     color: #07886E;
-    background: rgba(228, 240, 246, 0.8);
+    background: rgba(228, 240, 246, 0.85);
   }
 
   .nav-pill-active {
@@ -237,21 +249,23 @@ const navItems = [
     box-shadow: 0 3px 12px rgba(16, 184, 154, 0.35);
   }
 
+  /* Right: Actions */
   .nav-right-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
+    flex-shrink: 0;
   }
 
   .nav-quick-cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 6px 14px;
+    padding: 7px 16px;
     border-radius: 9999px;
     background: #102D46;
     color: #FFFFFF;
-    font-size: 13px;
+    font-size: 13.5px;
     font-weight: 600;
     text-decoration: none;
     transition: all 0.2s ease;
@@ -267,8 +281,8 @@ const navItems = [
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     background: #F4F9FC;
     border: 1px solid #DCE7EC;
@@ -290,11 +304,17 @@ const navItems = [
     cursor: pointer;
     padding: 6px;
     color: #102D46;
+    border-radius: 8px;
   }
 
+  .mobile-toggle-btn:hover {
+    background: #E4F0F6;
+  }
+
+  /* Mobile Dropdown */
   .mobile-dropdown-pane {
     margin-top: 10px;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.96);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid #DCE7EC;
@@ -319,15 +339,27 @@ const navItems = [
     font-weight: 700;
   }
 
-  @media (max-width: 960px) {
-    .desktop-nav-links {
+  @media (max-width: 992px) {
+    .site-header-wrapper {
+      top: 10px;
+      padding-left: 14px;
+      padding-right: 14px;
+      margin-bottom: 16px;
+    }
+    .header-pill {
+      height: 56px;
+      padding: 0 12px 0 14px;
+    }
+    .desktop-nav-center {
       display: none;
     }
     .nav-quick-cta {
       display: none;
     }
     .mobile-toggle-btn {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .brand-sub {
       display: none;

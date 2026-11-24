@@ -78,18 +78,18 @@ const featuredArticles = [
   description="机场智选汇集18家热门机场品牌及146条套餐记录，提供机场推荐、便宜机场、Clash机场、翻墙机场、智能套餐筛选及价格对比，根据预算、流量和设备需求，帮助用户理性购买适合自己的机场服务。"
   canonical="https://jichangzhixuan.blog/"
 >
-  <!-- Single Semantic H1 for SEO -->
-  <h1 class="sr-only">2026机场智选｜优质机场推荐与理性选购指南</h1>
-
   <!-- ========================================================= -->
-  <!-- 01. HERO SECTION: Apple-style Minimalist Tech Hero       -->
+  <!-- 01. HERO SECTION: Mature Apple-style Tech Hero with Ambient -->
   <!-- ========================================================= -->
   <section class="hero-section">
-    <div class="max-container">
+    <!-- Gentle flowing ambient gradient background (24-30s cycle) -->
+    <div class="hero-ambient-flow" aria-hidden="true"></div>
+
+    <div class="max-container" style="position: relative; z-index: 2;">
       <div class="hero-grid">
-        <!-- Hero Left Column: Brand Copy & CTAs -->
+        <!-- Hero Left Column: 52% on desktop -->
         <div class="hero-left-col">
-          <!-- Small Badge -->
+          <!-- SmartChoice MAX Tag -->
           <div class="hero-badge-wrap">
             <span class="hero-badge">
               <span class="hero-badge-dot"></span>
@@ -97,18 +97,18 @@ const featuredArticles = [
             </span>
           </div>
 
-          <!-- Giant Visual Heading -->
-          <h2 class="hero-display-title">
-            帮你更聪明地选择<br/>
-            合适的机场品牌与套餐
-          </h2>
+          <!-- Semantic & Visual Single H1 Title -->
+          <h1 class="hero-display-title">
+            帮你更聪明地选择<br />
+            适合的机场品牌与套餐
+          </h1>
 
-          <!-- Subtitle Copy -->
+          <!-- Brief Subtitle Introduction -->
           <p class="hero-subtitle">
             专注于机场（科学上网）品牌评测、套餐对比与选购指南，用专业、客观、易懂的内容，帮助你在众多选择中找到更稳定、更高性价比的方案。
           </p>
 
-          <!-- Action Buttons -->
+          <!-- Buttons Row: Height 48px, unified pill radius & typography -->
           <div class="hero-buttons-row">
             <a href="#smart-filter" class="btn-hero-primary">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
@@ -128,7 +128,7 @@ const featuredArticles = [
           </div>
         </div>
 
-        <!-- Hero Right Column: Terminal Window View -->
+        <!-- Hero Right Column: 48% on desktop (Terminal Image) -->
         <div class="hero-right-col">
           <div class="hero-window-card">
             <img
@@ -136,13 +136,13 @@ const featuredArticles = [
               alt="机场智选现代化候机楼与停机坪全景视角"
               class="hero-terminal-img"
               width="600"
-              height="380"
+              height="375"
               loading="eager"
             />
             <div class="hero-window-overlay">
               <div class="hero-overlay-tag">
                 <span class="live-pulse"></span>
-                <span>全天候网络线路监测已接入</span>
+                <span>机场品牌资料持续整理</span>
               </div>
             </div>
           </div>
@@ -152,13 +152,13 @@ const featuredArticles = [
   </section>
 
   <!-- ========================================================= -->
-  <!-- 02. SECTION: 智能选机场 (Split Column + 4 Dropdown Cards)   -->
+  <!-- 02. SECTION: 智能选机场 (24% Left + 4 Equal Cards Right)     -->
   <!-- ========================================================= -->
-  <section id="smart-filter" class="section-container">
+  <section id="smart-filter" class="smart-filter-section">
     <div class="max-container">
-      <div class="split-layout">
-        <!-- Left Column: Title & Description -->
-        <div class="split-left">
+      <div class="smart-filter-layout">
+        <!-- Left: 24% Width Column -->
+        <div class="smart-filter-left">
           <div class="split-title-group">
             <span class="emerald-indicator-bar"></span>
             <h2 class="split-heading">智能选机场</h2>
@@ -166,103 +166,105 @@ const featuredArticles = [
           <p class="split-desc">
             告诉我们你的使用需求，快速找到更适合的机场品牌与套餐。
           </p>
-          <a href="/smart-match/" class="split-action-link" style="margin-top: 16px; display: inline-flex;">
+          <a href="/smart-match/" class="split-action-link">
             进入全功能匹配器 →
           </a>
         </div>
 
-        <!-- Right Column: 4 Dropdown Selector Cards -->
-        <div class="split-right">
-          <form action="/smart-match/" method="GET" class="filter-cards-grid">
-            <!-- Card 1: 预算范围 -->
-            <div class="filter-card">
-              <div class="filter-card-header">
-                <div class="filter-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="4" width="20" height="16" rx="3"/>
-                    <path d="M16 8v.01M12 12v.01M8 16v.01"/>
-                  </svg>
+        <!-- Right: Remaining Space with 4 Equal Cards Grid -->
+        <div class="smart-filter-right">
+          <form action="/smart-match/" method="GET" class="filter-form-box">
+            <div class="filter-cards-equal-grid">
+              <!-- Card 1: 预算范围 -->
+              <div class="filter-card">
+                <div class="filter-card-header">
+                  <div class="filter-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="4" width="20" height="16" rx="3"/>
+                      <path d="M16 8v.01M12 12v.01M8 16v.01"/>
+                    </svg>
+                  </div>
+                  <span class="filter-title">预算范围</span>
                 </div>
-                <span class="filter-title">预算范围</span>
+                <div class="filter-select-wrap">
+                  <select name="budget" class="filter-select" aria-label="预算范围筛选">
+                    <option value="all">你期望的月度预算? ▾</option>
+                    <option value="under20">¥20/月及以下 (平价亲民)</option>
+                    <option value="under30">¥20 - ¥30/月 (主流均衡)</option>
+                    <option value="30to60">¥30 - ¥60/月 (高阶大流量)</option>
+                    <option value="above60">¥60/月以上 (企业定制)</option>
+                  </select>
+                </div>
               </div>
-              <div class="filter-select-wrap">
-                <select name="budget" class="filter-select" aria-label="预算范围筛选">
-                  <option value="all">你期望的月度预算? ▾</option>
-                  <option value="under20">¥20/月及以下 (平价亲民)</option>
-                  <option value="under30">¥20 - ¥30/月 (主流均衡)</option>
-                  <option value="30to60">¥30 - ¥60/月 (高阶大流量)</option>
-                  <option value="above60">¥60/月以上 (企业定制)</option>
-                </select>
+
+              <!-- Card 2: 流量需求 -->
+              <div class="filter-card">
+                <div class="filter-card-header">
+                  <div class="filter-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                    </svg>
+                  </div>
+                  <span class="filter-title">流量需求</span>
+                </div>
+                <div class="filter-select-wrap">
+                  <select name="traffic" class="filter-select" aria-label="流量需求筛选">
+                    <option value="all">你每月大概用多少流量? ▾</option>
+                    <option value="50">50GB / 月 (日常轻度)</option>
+                    <option value="100">100GB / 月 (主流标准)</option>
+                    <option value="200">200GB / 月 (影音流媒体)</option>
+                    <option value="500">500GB+ / 月 (重度大流量)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Card 3: 设备数量 -->
+              <div class="filter-card">
+                <div class="filter-card-header">
+                  <div class="filter-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="2" y="3" width="20" height="14" rx="2"/>
+                      <line x1="8" y1="21" x2="16" y2="21"/>
+                      <line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                  </div>
+                  <span class="filter-title">设备数量</span>
+                </div>
+                <div class="filter-select-wrap">
+                  <select name="device" class="filter-select" aria-label="设备数量筛选">
+                    <option value="all">需要同时使用几台设备? ▾</option>
+                    <option value="1-2">1 - 2 台设备 (单人自用)</option>
+                    <option value="3-5">3 - 5 台设备 (多设备联动)</option>
+                    <option value="unlimited">不限设备数 (家庭/合租)</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Card 4: 使用场景 -->
+              <div class="filter-card">
+                <div class="filter-card-header">
+                  <div class="filter-icon-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                      <polyline points="2 17 12 22 22 17"/>
+                      <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                  </div>
+                  <span class="filter-title">使用场景</span>
+                </div>
+                <div class="filter-select-wrap">
+                  <select name="scenario" class="filter-select" aria-label="使用场景筛选">
+                    <option value="all">主要用于哪些场景? ▾</option>
+                    <option value="web">日常网页与学术文献</option>
+                    <option value="ai">ChatGPT / Claude 等 AI 开发</option>
+                    <option value="video">YouTube / Netflix 4K 影音</option>
+                    <option value="clash">支持第三方 Clash 订阅导入</option>
+                  </select>
+                </div>
               </div>
             </div>
 
-            <!-- Card 2: 流量需求 -->
-            <div class="filter-card">
-              <div class="filter-card-header">
-                <div class="filter-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                  </svg>
-                </div>
-                <span class="filter-title">流量需求</span>
-              </div>
-              <div class="filter-select-wrap">
-                <select name="traffic" class="filter-select" aria-label="流量需求筛选">
-                  <option value="all">你每月大概用多少流量? ▾</option>
-                  <option value="50">50GB / 月 (日常轻度)</option>
-                  <option value="100">100GB / 月 (主流标准)</option>
-                  <option value="200">200GB / 月 (影音流媒体)</option>
-                  <option value="500">500GB+ / 月 (重度大流量)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Card 3: 设备数量 -->
-            <div class="filter-card">
-              <div class="filter-card-header">
-                <div class="filter-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="3" width="20" height="14" rx="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21"/>
-                    <line x1="12" y1="17" x2="12" y2="21"/>
-                  </svg>
-                </div>
-                <span class="filter-title">设备数量</span>
-              </div>
-              <div class="filter-select-wrap">
-                <select name="device" class="filter-select" aria-label="设备数量筛选">
-                  <option value="all">需要同时使用几台设备? ▾</option>
-                  <option value="1-2">1 - 2 台设备 (单人自用)</option>
-                  <option value="3-5">3 - 5 台设备 (多设备联动)</option>
-                  <option value="unlimited">不限设备数 (家庭/合租)</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Card 4: 使用场景 -->
-            <div class="filter-card">
-              <div class="filter-card-header">
-                <div class="filter-icon-box">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-                    <polyline points="2 17 12 22 22 17"/>
-                    <polyline points="2 12 12 17 22 12"/>
-                  </svg>
-                </div>
-                <span class="filter-title">使用场景</span>
-              </div>
-              <div class="filter-select-wrap">
-                <select name="scenario" class="filter-select" aria-label="使用场景筛选">
-                  <option value="all">主要用于哪些场景? ▾</option>
-                  <option value="web">日常网页与学术文献</option>
-                  <option value="ai">ChatGPT / Claude 等 AI 开发</option>
-                  <option value="video">YouTube / Netflix 4K 影音</option>
-                  <option value="clash">支持第三方 Clash 订阅导入</option>
-                </select>
-              </div>
-            </div>
-
-            <!-- Submit action bar span across columns -->
+            <!-- Submit Action Bar -->
             <div class="filter-action-bar">
               <div class="filter-status-info">
                 <span class="check-green">✓</span>
@@ -857,27 +859,79 @@ const featuredArticles = [
     }
   }
 
-  /* 01. HERO STYLING */
+  /* ========================================================= */
+  /* 01. HERO STYLING (Apple Minimalist Tech with Dynamic Glow) */
+  /* ========================================================= */
   .hero-section {
     position: relative;
-    padding-top: 48px;
-    padding-bottom: 60px;
-    background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%);
-    border-bottom: 1px solid #DCE7EC;
     overflow: hidden;
+    background-color: #F8FCFF; /* 冰川白基调 */
+    padding-top: 52px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #DCE7EC;
+  }
+
+  @media (min-width: 960px) {
+    .hero-section {
+      padding-top: 64px;
+      padding-bottom: 72px;
+    }
+  }
+
+  /* Dynamic low-intensity ambient mesh gradient (20-30s cycle) */
+  .hero-ambient-flow {
+    position: absolute;
+    inset: -35%;
+    width: 170%;
+    height: 170%;
+    background: 
+      radial-gradient(circle at 22% 28%, rgba(220, 238, 255, 0.72) 0%, transparent 42%), /* 浅冰蓝 #DCEEFF */
+      radial-gradient(circle at 78% 32%, rgba(184, 242, 226, 0.5) 0%, transparent 45%),   /* 翡翠青 #B8F2E2 */
+      radial-gradient(circle at 50% 72%, rgba(237, 243, 247, 0.85) 0%, transparent 48%),  /* 淡银灰 #EDF3F7 */
+      radial-gradient(circle at 82% 78%, rgba(220, 238, 255, 0.45) 0%, transparent 40%);
+    filter: blur(48px);
+    animation: ambientFluidMotion 26s ease-in-out infinite alternate;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes ambientFluidMotion {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-3%, 2%) scale(1.04);
+    }
+    100% {
+      transform: translate(2%, -2.5%) scale(0.98);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-ambient-flow {
+      opacity: 0.6;
+      filter: blur(30px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-ambient-flow {
+      animation: none;
+    }
   }
 
   .hero-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
+    gap: 36px;
+    align-items: center; /* 左右垂直居中 */
   }
 
   @media (min-width: 960px) {
     .hero-grid {
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 48px;
+      /* Left ~52%, Right ~48% */
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+      gap: 44px;
     }
   }
 
@@ -906,64 +960,69 @@ const featuredArticles = [
     background: #10B89A;
   }
 
+  /* Single Semantic H1: 48–56px on desktop, 32–38px on mobile */
   .hero-display-title {
-    font-size: clamp(32px, 4.2vw, 56px);
-    font-weight: 900;
-    line-height: 1.18;
+    font-size: clamp(32px, 3.8vw, 52px);
+    font-weight: 850;
+    line-height: 1.2;
     color: #102D46;
     letter-spacing: -0.025em;
-    margin-bottom: 18px;
+    margin: 0 0 18px 0;
   }
 
   .hero-subtitle {
-    font-size: clamp(15.5px, 1.6vw, 17.5px);
+    font-size: clamp(15px, 1.4vw, 17px);
     color: #647B8C;
     line-height: 1.75;
-    max-width: 620px;
-    margin-bottom: 32px;
+    max-width: 580px;
+    margin-bottom: 30px;
   }
 
   .hero-buttons-row {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
   }
 
   .btn-hero-primary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 13px 28px;
+    height: 48px;
+    padding: 0 26px;
     border-radius: 9999px;
     background: #10B89A;
     color: #FFFFFF;
-    font-weight: 700;
-    font-size: 16px;
+    font-weight: 600;
+    font-size: 15.5px;
     text-decoration: none;
-    box-shadow: 0 6px 20px rgba(16, 184, 154, 0.35);
+    box-shadow: 0 4px 16px rgba(16, 184, 154, 0.32);
     transition: all 0.25s ease;
   }
 
   .btn-hero-primary:hover {
     background: #07886E;
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(16, 184, 154, 0.45);
+    box-shadow: 0 6px 22px rgba(16, 184, 154, 0.42);
   }
 
   .btn-hero-secondary {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    padding: 13px 26px;
+    height: 48px;
+    padding: 0 24px;
     border-radius: 9999px;
     background: #FFFFFF;
     color: #102D46;
     border: 1.5px solid #DCE7EC;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15.5px;
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(16, 45, 70, 0.04);
+    box-shadow: 0 2px 10px rgba(16, 45, 70, 0.04);
     transition: all 0.25s ease;
   }
 
@@ -973,13 +1032,13 @@ const featuredArticles = [
     transform: translateY(-2px);
   }
 
-  /* Right Window Card */
+  /* Right Terminal Image Card: 24px radius, soft shadow, no distortion */
   .hero-window-card {
     position: relative;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 20px 48px rgba(16, 45, 70, 0.12);
-    border: 1px solid rgba(220, 231, 236, 0.8);
+    box-shadow: 0 20px 48px rgba(16, 45, 70, 0.09);
+    border: 1px solid rgba(220, 231, 236, 0.85);
     background: #FFFFFF;
   }
 
@@ -989,6 +1048,7 @@ const featuredArticles = [
     display: block;
     object-fit: cover;
     aspect-ratio: 16 / 10;
+    border-radius: 24px;
     transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -1035,28 +1095,44 @@ const featuredArticles = [
     100% { transform: scale(0.95); opacity: 0.8; }
   }
 
-  /* 02. SPLIT SECTION LAYOUT (The Signature Pattern) */
-  .split-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+  /* ========================================================= */
+  /* 02. 智能选机场 SECTION (24% Left Column + 4 Equal Cards)    */
+  /* ========================================================= */
+  .smart-filter-section {
+    padding-top: 56px;
+    padding-bottom: 56px;
+    background: #F4F9FC;
+    border-bottom: 1px solid #DCE7EC;
   }
 
-  @media (min-width: 960px) {
-    .split-layout {
+  @media (min-width: 768px) {
+    .smart-filter-section {
+      padding-top: 68px;
+      padding-bottom: 68px;
+    }
+  }
+
+  .smart-filter-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    .smart-filter-layout {
       flex-direction: row;
-      gap: 36px;
+      gap: 32px;
       align-items: flex-start;
     }
 
-    .split-left {
-      flex: 0 0 240px;
-      width: 240px;
+    .smart-filter-left {
+      flex: 0 0 24%;
+      max-width: 24%;
       position: sticky;
-      top: 90px;
+      top: 96px;
     }
 
-    .split-right {
+    .smart-filter-right {
       flex: 1;
       min-width: 0;
     }
@@ -1092,6 +1168,21 @@ const featuredArticles = [
     margin: 0;
   }
 
+  .split-action-link {
+    display: inline-flex;
+    margin-top: 16px;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #07886E;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .split-action-link:hover {
+    color: #10B89A;
+    text-decoration: underline;
+  }
+
   .split-action-btn {
     display: inline-flex;
     align-items: center;
@@ -1116,35 +1207,28 @@ const featuredArticles = [
     transform: translateY(-1px);
   }
 
-  .split-action-link {
-    font-size: 13.5px;
-    font-weight: 700;
-    color: #07886E;
-    text-decoration: none;
-    transition: color 0.15s ease;
+  /* 4 Equal Cards Grid */
+  .filter-form-box {
+    width: 100%;
   }
 
-  .split-action-link:hover {
-    color: #10B89A;
-    text-decoration: underline;
-  }
-
-  /* 03. FILTER CARDS GRID */
-  .filter-cards-grid {
+  .filter-cards-equal-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 14px;
   }
 
-  @media (min-width: 600px) {
-    .filter-cards-grid {
+  @media (min-width: 640px) {
+    .filter-cards-equal-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
   }
 
   @media (min-width: 1100px) {
-    .filter-cards-grid {
+    .filter-cards-equal-grid {
       grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
     }
   }
 
@@ -1152,12 +1236,13 @@ const featuredArticles = [
     background: #FFFFFF;
     border: 1px solid #DCE7EC;
     border-radius: 18px;
-    padding: 16px;
+    padding: 18px 16px;
     box-shadow: 0 4px 16px rgba(16, 45, 70, 0.03);
     transition: all 0.25s ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: 100%;
   }
 
   .filter-card:hover {
@@ -1193,11 +1278,13 @@ const featuredArticles = [
 
   .filter-select-wrap {
     position: relative;
+    width: 100%;
   }
 
   .filter-select {
     width: 100%;
-    padding: 9px 12px;
+    height: 42px;
+    padding: 0 30px 0 12px;
     border-radius: 10px;
     border: 1px solid #DCE7EC;
     background: #F8FBFE;
@@ -1205,7 +1292,7 @@ const featuredArticles = [
     font-size: 13px;
     cursor: pointer;
     outline: none;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
     appearance: none;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23647B8C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
@@ -1216,16 +1303,16 @@ const featuredArticles = [
   .filter-select:focus {
     border-color: #10B89A;
     background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(16, 184, 154, 0.15);
   }
 
   .filter-action-bar {
-    grid-column: 1 / -1;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     gap: 14px;
-    margin-top: 6px;
+    margin-top: 16px;
     background: rgba(228, 240, 246, 0.6);
     border: 1px solid #DCE7EC;
     border-radius: 14px;
@@ -1267,7 +1354,36 @@ const featuredArticles = [
     box-shadow: 0 4px 14px rgba(16, 184, 154, 0.3);
   }
 
-  /* 04. BRAND CARDS GRID */
+  /* ========================================================= */
+  /* 03. OTHER SPLIT SECTIONS (Brand, Plans, Articles, FAQ)     */
+  /* ========================================================= */
+  .split-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  @media (min-width: 960px) {
+    .split-layout {
+      flex-direction: row;
+      gap: 36px;
+      align-items: flex-start;
+    }
+
+    .split-left {
+      flex: 0 0 240px;
+      width: 240px;
+      position: sticky;
+      top: 96px;
+    }
+
+    .split-right {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  /* Brand Cards Grid */
   .brand-cards-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1416,7 +1532,7 @@ const featuredArticles = [
     text-decoration: underline;
   }
 
-  /* 05. PRICING TIERS GRID */
+  /* Pricing Tiers Grid */
   .pricing-tiers-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1557,7 +1673,7 @@ const featuredArticles = [
     font-size: 14px;
     font-weight: 700;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
   }
 
   .btn-tier-outline {
@@ -1585,7 +1701,7 @@ const featuredArticles = [
     box-shadow: 0 6px 18px rgba(16, 184, 154, 0.45);
   }
 
-  /* 06. ARTICLE CARDS GRID */
+  /* Article Cards Grid */
   .article-cards-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -1687,7 +1803,7 @@ const featuredArticles = [
     font-weight: 600;
   }
 
-  /* 07. FAQ ACCORDION */
+  /* FAQ Accordion */
   .faq-accordion-list {
     display: flex;
     flex-direction: column;

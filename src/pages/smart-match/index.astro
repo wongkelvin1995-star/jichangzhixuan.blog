@@ -364,6 +364,32 @@ const pageDesc = "基于真实套餐数据库与多维度匹配算法。根据�
       runMatch();
     });
 
+    // Check URL parameters from homepage fast filter
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const qBudget = urlParams.get('budget');
+      const qTraffic = urlParams.get('traffic');
+      const qScenario = urlParams.get('scenario');
+
+      if (qBudget && qBudget !== 'all') {
+        if (qBudget === 'under20') budgetSelect.value = '20';
+        else if (qBudget === 'under30') budgetSelect.value = '30';
+        else if (qBudget === '30to60') budgetSelect.value = '60';
+        else if (qBudget === 'above60') budgetSelect.value = '100';
+        else budgetSelect.value = qBudget;
+      }
+
+      if (qTraffic && qTraffic !== 'all') {
+        trafficSelect.value = qTraffic;
+      }
+
+      if (qScenario === 'clash') {
+        clashSelect.value = 'must_clash';
+      }
+    } catch (e) {
+      console.warn('URL params parsing skipped', e);
+    }
+
     // Auto-run on load
     runMatch();
   </script>
