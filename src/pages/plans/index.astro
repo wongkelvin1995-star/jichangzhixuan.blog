@@ -1,0 +1,206 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import options from '../../data/options.json';
+
+const pageTitle = "全部机场套餐数据库｜261项购买价格选项与流量对比｜机场智选";
+const pageDesc = "全网最全机场套餐结构化数据库。收录18家品牌全部146条真实套餐与261项购买选项，支持按月付、季付、年付、一次性流量包及价格筛选。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/plans/"
+  breadcrumbs={[
+    { name: '全部套餐', url: '/plans/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">结构化套餐库</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          全站机场套餐与价格数据库
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          完整汇集 18 家机场品牌、146 条原始套餐记录及 261 项带价格的购买选项。支持品牌、付款周期与价格区间自由筛选，所有数据保留原始精度。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <!-- Filters bar -->
+      <div class="smart-card" style="padding: 24px; background: #F8FBFE; border: 1.5px solid #DCE7EC; margin-bottom: 32px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #263E50; margin-bottom: 6px;">按品牌筛选</label>
+            <select id="plan-brand-filter" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14px;">
+              <option value="all">全部 18 个品牌</option>
+              {brands.map(b => (
+                <option value={b.slug}>{b.name} ({b.englishName})</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #263E50; margin-bottom: 6px;">按付款周期筛选</label>
+            <select id="plan-period-filter" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14px;">
+              <option value="all">全部付款周期</option>
+              <option value="月付">月付套餐 (1个月)</option>
+              <option value="季付">季付套餐 (3个月)</option>
+              <option value="半年付">半年付套餐 (6个月)</option>
+              <option value="年付">年付套餐 (12个月)</option>
+              <option value="长周期">两年付/三年付</option>
+              <option value="一次性购买">不限时一次性流量包</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #263E50; margin-bottom: 6px;">最高实付价格</label>
+            <select id="plan-price-filter" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14px;">
+              <option value="all">不限价格</option>
+              <option value="25">¥25 以内 (低门槛月付)</option>
+              <option value="60">¥60 以内 (主流月付/季度)</option>
+              <option value="120">¥120 以内 (百元年付/半年)</option>
+              <option value="300">¥300 以内 (主流年付)</option>
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #263E50; margin-bottom: 6px;">排序方式</label>
+            <select id="plan-sort-filter" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14px;">
+              <option value="brand">按品牌编辑推荐顺序</option>
+              <option value="price_asc">实付价格从低到高</option>
+              <option value="monthly_asc">折合月均从低到高</option>
+              <option value="traffic_desc">流量额度从大到小</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Count Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div id="plans-count" style="font-size: 16px; font-weight: 700; color: #102D46;">
+          正在加载全部套餐...
+        </div>
+      </div>
+
+      <!-- Table View -->
+      <div class="data-table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>所属品牌</th>
+              <th>套餐名称</th>
+              <th>付款周期</th>
+              <th>整期实付金额</th>
+              <th>折合月均成本</th>
+              <th>套餐额度</th>
+              <th>名义每GB单价</th>
+              <th>操作与档案</th>
+            </tr>
+          </thead>
+          <tbody id="plans-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <script define:vars={{ optionsData: options }}>
+    const allOptions = optionsData;
+
+    const brandFilter = document.getElementById('plan-brand-filter');
+    const periodFilter = document.getElementById('plan-period-filter');
+    const priceFilter = document.getElementById('plan-price-filter');
+    const sortFilter = document.getElementById('plan-sort-filter');
+    const tableBody = document.getElementById('plans-table-body');
+    const countText = document.getElementById('plans-count');
+
+    function filterPlans() {
+      const bVal = brandFilter.value;
+      const pVal = periodFilter.value;
+      const prVal = priceFilter.value;
+      const sVal = sortFilter.value;
+
+      let filtered = allOptions.filter(opt => {
+        if (bVal !== 'all' && opt.brandId !== bVal) return false;
+        
+        if (pVal !== 'all') {
+          if (pVal === '长周期') {
+            if (opt.periodName !== '两年付' && opt.periodName !== '三年付') return false;
+          } else if (opt.periodName !== pVal) {
+            return false;
+          }
+        }
+
+        if (prVal !== 'all') {
+          const maxP = parseFloat(prVal);
+          if (opt.totalPrice > maxP) return false;
+        }
+
+        return true;
+      });
+
+      // Sort
+      filtered.sort((a, b) => {
+        if (sVal === 'price_asc') return a.totalPrice - b.totalPrice;
+        if (sVal === 'monthly_asc') {
+          const ma = a.monthlyCost || a.totalPrice;
+          const mb = b.monthlyCost || b.totalPrice;
+          return ma - mb;
+        }
+        if (sVal === 'traffic_desc') {
+          const ta = a.monthlyTrafficGB || a.totalTrafficGB || 0;
+          const tb = b.monthlyTrafficGB || b.totalTrafficGB || 0;
+          return tb - ta;
+        }
+        return 0; // brand default
+      });
+
+      countText.textContent = `当前展示 ${filtered.length} 个符合条件的购买选项 (全库共 261 项)`;
+
+      tableBody.innerHTML = filtered.map(opt => `
+        <tr>
+          <td style="font-weight: 700; color: #102D46;">
+            <a href="/airports/${opt.brandId}/" style="color: inherit; text-decoration: underline dotted #10B89A;">
+              ${opt.brandName}
+            </a>
+          </td>
+          <td style="font-weight: 600;">${opt.planName}</td>
+          <td>
+            <span style="display: inline-block; padding: 2px 8px; border-radius: 6px; font-size: 12px; background: #F4F9FC; border: 1px solid #DCE7EC;">
+              ${opt.periodName}
+            </span>
+          </td>
+          <td style="font-weight: 800; color: #102D46;">¥${opt.totalPrice}</td>
+          <td style="color: #07886E; font-weight: 700;">
+            ${opt.monthlyCost ? `¥${opt.monthlyCost}/月` : '买断计费'}
+          </td>
+          <td>${opt.trafficText}</td>
+          <td style="color: #647B8C; font-size: 13.5px;">
+            ${opt.unitCostPerGB ? `¥${opt.unitCostPerGB}/GB` : '—'}
+          </td>
+          <td>
+            <div style="display: flex; gap: 8px;">
+              <a href="/airports/${opt.brandId}/" style="font-size: 13px; font-weight: 600; color: #07886E; text-decoration: none;">
+                档案 →
+              </a>
+              <a href="${opt.purchaseUrl}" target="_blank" rel="sponsored nofollow noopener" style="font-size: 13px; font-weight: 600; color: #10B89A; text-decoration: underline;">
+                购买
+              </a>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    [brandFilter, periodFilter, priceFilter, sortFilter].forEach(el => el.addEventListener('change', filterPlans));
+    filterPlans();
+  </script>
+</Layout>

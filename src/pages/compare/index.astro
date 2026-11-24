@@ -1,0 +1,244 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+
+const pageTitle = "机场品牌多维度横向对比｜18家机场参数同屏PK与理性选购";
+const pageDesc = "自由选择2至4家机场品牌同屏横向对比。对比月付年付价格、节点地区、线路协议、客户端兼容性、第三方Clash订阅政策、优势与不足，助您做出理性决策。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/compare/"
+  breadcrumbs={[
+    { name: '套餐对比', url: '/compare/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">专业横向比对</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场品牌多维度横向对比 (PK台)
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          自由挑选 2 到 4 家机场品牌，在同屏进行起步价、节点覆盖、网络架构、第三方订阅政策、客户端与退款条款的逐项深入比对。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <!-- Brand Picker Selectors -->
+      <div class="smart-card" style="padding: 24px; background: #F8FBFE; border: 1.5px solid #DCE7EC; margin-bottom: 32px;">
+        <div style="font-size: 15px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+          🔍 选择要进行横向对比的品牌 (支持2至4个)：
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #647B8C; margin-bottom: 6px;">对比品牌 1</label>
+            <select id="select-brand-1" class="brand-select" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+              {brands.map(b => (
+                <option value={b.slug} selected={b.slug === 'lingdongyun'}>{b.name} (#{b.rank < 10 ? `0${b.rank}` : b.rank})</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #647B8C; margin-bottom: 6px;">对比品牌 2</label>
+            <select id="select-brand-2" class="brand-select" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+              {brands.map(b => (
+                <option value={b.slug} selected={b.slug === 'twilight'}>{b.name} (#{b.rank < 10 ? `0${b.rank}` : b.rank})</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #647B8C; margin-bottom: 6px;">对比品牌 3</label>
+            <select id="select-brand-3" class="brand-select" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+              <option value="none">-- 不对比该槽位 --</option>
+              {brands.map(b => (
+                <option value={b.slug} selected={b.slug === 'breezenet'}>{b.name} (#{b.rank < 10 ? `0${b.rank}` : b.rank})</option>
+              ))}
+            </select>
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 13px; font-weight: 700; color: #647B8C; margin-bottom: 6px;">对比品牌 4</label>
+            <select id="select-brand-4" class="brand-select" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+              <option value="none" selected>-- 不对比该槽位 --</option>
+              {brands.map(b => (
+                <option value={b.slug}>{b.name} (#{b.rank < 10 ? `0${b.rank}` : b.rank})</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comparison Dynamic Table Container -->
+      <div id="comparison-table-wrapper" class="data-table-container">
+        <!-- Rendered by JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <script define:vars={{ brandsData: brands }}>
+    const allBrands = brandsData;
+
+    const s1 = document.getElementById('select-brand-1');
+    const s2 = document.getElementById('select-brand-2');
+    const s3 = document.getElementById('select-brand-3');
+    const s4 = document.getElementById('select-brand-4');
+    const tableWrapper = document.getElementById('comparison-table-wrapper');
+
+    function renderComparison() {
+      const selectedSlugs = [s1.value, s2.value, s3.value, s4.value].filter(v => v && v !== 'none');
+      const selectedBrands = selectedSlugs.map(slug => allBrands.find(b => b.slug === slug)).filter(Boolean);
+
+      if (selectedBrands.length === 0) {
+        tableWrapper.innerHTML = '<div style="padding: 32px; text-align: center;">请至少选择 1 个品牌进行比对。</div>';
+        return;
+      }
+
+      let html = `
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th style="width: 180px; min-width: 160px; background: #F4F9FC;">对比维度</th>
+              ${selectedBrands.map(b => `
+                <th style="min-width: 240px; text-align: center;">
+                  <div style="font-size: 20px; font-weight: 800; color: #102D46;">${b.name}</div>
+                  <div style="font-size: 12.5px; color: #647B8C; font-weight: normal; margin-top: 2px;">${b.englishName} · ${b.badge}</div>
+                </th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Row: Overview -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">定位与简介</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13.5px; line-height: 1.6; color: #263E50;">${b.introduction}</td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Monthly Entry -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">月付起步价格</td>
+              ${selectedBrands.map(b => `
+                <td style="text-align: center;">
+                  <div style="font-size: 20px; font-weight: 900; color: #102D46;">${b.minMonthlyPrice ? `¥${b.minMonthlyPrice}/月` : '无直购月付'}</div>
+                  <div style="font-size: 12px; color: #647B8C;">${b.minMonthlyTraffic ? `配额：${b.minMonthlyTraffic}` : ''}</div>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Yearly Entry -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">年付门槛</td>
+              ${selectedBrands.map(b => `
+                <td style="text-align: center;">
+                  <div style="font-size: 20px; font-weight: 900; color: #07886E;">${b.minYearlyPrice ? `¥${b.minYearlyPrice}/年` : '无独立年付'}</div>
+                  <div style="font-size: 12px; color: #647B8C;">${b.minYearlyTraffic ? `配额：${b.minYearlyTraffic}` : ''}</div>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Network & Protocols -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">线路与协议</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13.5px; line-height: 1.6;">
+                  <div><strong>线路：</strong>${b.networkTypes.join(' / ')}</div>
+                  <div style="margin-top: 4px;"><strong>协议：</strong>${b.protocols.join(' / ')}</div>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Third-party Subscription Policy -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">第三方Clash订阅政策</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13px; line-height: 1.6;">
+                  <div style="font-weight: 600; color: ${b.subPolicy.provided.includes('客服') || b.subPolicy.restrictions.includes('门槛') ? '#B25E00' : '#102D46'};">
+                    ${b.subPolicy.provided}
+                  </div>
+                  <div style="font-size: 12px; color: #647B8C; margin-top: 4px;">${b.subPolicy.restrictions || ''}</div>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Device Limits -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">设备限制</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13.5px; text-align: center; color: #263E50;">
+                  ${b.deviceLimits.maxOnline || '以官方说明为准'}
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Advantages -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">核心优势</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13px; line-height: 1.6;">
+                  <ul style="padding-left: 16px; margin: 0; color: #07886E;">
+                    ${b.advantages.slice(0, 3).map(a => `<li>${a}</li>`).join('')}
+                  </ul>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Limitations -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">不足与限制</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13px; line-height: 1.6;">
+                  <ul style="padding-left: 16px; margin: 0; color: #C05621;">
+                    ${b.limitations.slice(0, 3).map(l => `<li>${l}</li>`).join('')}
+                  </ul>
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Refund -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">退款政策</td>
+              ${selectedBrands.map(b => `
+                <td style="font-size: 13px; line-height: 1.5; color: #647B8C;">
+                  ${b.refundPolicy.supportRefund}
+                </td>
+              `).join('')}
+            </tr>
+
+            <!-- Row: Actions -->
+            <tr>
+              <td style="font-weight: 700; background: #F8FBFE;">操作入口</td>
+              ${selectedBrands.map(b => `
+                <td style="text-align: center; padding: 16px;">
+                  <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <a href="/airports/${b.slug}/" class="btn-secondary" style="padding: 8px 12px; font-size: 13px;">
+                      详细档案评测
+                    </a>
+                    <a href="${b.purchaseUrl}" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="padding: 8px 12px; font-size: 13px;">
+                      访问品牌官网
+                    </a>
+                  </div>
+                </td>
+              `).join('')}
+            </tr>
+          </tbody>
+        </table>
+      `;
+
+      tableWrapper.innerHTML = html;
+    }
+
+    [s1, s2, s3, s4].forEach(el => el.addEventListener('change', renderComparison));
+    renderComparison();
+  </script>
+</Layout>

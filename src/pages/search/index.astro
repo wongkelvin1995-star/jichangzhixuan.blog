@@ -1,0 +1,243 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import plans from '../../data/plans.json';
+import options from '../../data/options.json';
+
+const pageTitle = "站内搜索｜检索18家机场品牌与146条套餐记录｜机场智选";
+const pageDesc = "全站搜索中心。支持即时检索18家机场品牌、146条真实套餐、261项价格选项、线路协议、节点地区及专栏文章。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/search/"
+  breadcrumbs={[
+    { name: '站内搜索', url: '/search/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">全站检索中心</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          检索机场品牌、套餐价格与选购指南
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          输入品牌名称、套餐关键词、协议或地区（如：灵动云、月付、100GB、Clash、专线、年付99等），秒级检索真实数据库。
+        </p>
+
+        <!-- Search Input Box -->
+        <div style="margin-top: 24px; position: relative;">
+          <input
+            id="search-input"
+            type="search"
+            placeholder="输入品牌名称、套餐、协议或关键词..."
+            style="width: 100%; height: 56px; padding: 0 52px 0 20px; font-size: 17px; border-radius: 16px; border: 2px solid #10B89A; background: #FFFFFF; box-shadow: 0 8px 24px rgba(16, 184, 154, 0.12); color: #102D46; outline: none;"
+          />
+          <button id="search-clear-btn" type="button" style="display: none; position: absolute; right: 16px; top: 16px; border: none; background: transparent; font-size: 18px; color: #8BA0B2; cursor: pointer;">
+            ✕
+          </button>
+        </div>
+
+        <!-- Popular Keywords -->
+        <div style="margin-top: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 13.5px; color: #647B8C;">
+          <span>热门搜索：</span>
+          <button class="keyword-tag" data-kw="灵动云">灵动云</button>
+          <button class="keyword-tag" data-kw="暮光加速">暮光加速</button>
+          <button class="keyword-tag" data-kw="微风网络">微风网络</button>
+          <button class="keyword-tag" data-kw="月付">月付套餐</button>
+          <button class="keyword-tag" data-kw="年付">年付轻量包</button>
+          <button class="keyword-tag" data-kw="不限时">不限时流量包</button>
+          <button class="keyword-tag" data-kw="Clash">Clash订阅</button>
+          <button class="keyword-tag" data-kw="专线">IEPL/IPLC专线</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <div id="search-status" style="font-size: 16px; font-weight: 700; color: #102D46; margin-bottom: 24px;">
+        输入关键词开始搜索
+      </div>
+
+      <!-- Results Grid -->
+      <div id="search-results-grid" class="grid-3">
+        <!-- Injected by client JS -->
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    .keyword-tag {
+      background: #FFFFFF;
+      border: 1px solid #DCE7EC;
+      color: #263E50;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .keyword-tag:hover {
+      border-color: #10B89A;
+      color: #07886E;
+      background: #E4F0F6;
+    }
+  </style>
+
+  <script define:vars={{ brandsData: brands, optionsData: options }}>
+    const allBrands = brandsData;
+    const allOptions = optionsData;
+
+    const input = document.getElementById('search-input');
+    const clearBtn = document.getElementById('search-clear-btn');
+    const statusText = document.getElementById('search-status');
+    const resultsGrid = document.getElementById('search-results-grid');
+    const tagBtns = document.querySelectorAll('.keyword-tag');
+
+    // Parse URL param ?q=
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('q')) {
+      input.value = urlParams.get('q');
+    }
+
+    function doSearch() {
+      const q = input.value.trim().toLowerCase();
+      clearBtn.style.display = q ? 'block' : 'none';
+
+      if (!q) {
+        statusText.textContent = '共收录 18 个品牌、146 条套餐记录与 261 项购买选项，请输入关键词检索。';
+        // Show all brands as default overview
+        resultsGrid.innerHTML = allBrands.map(b => `
+          <div class="smart-card" style="padding: 24px;">
+            <div style="font-size: 12px; font-weight: 700; color: #10B89A;">${b.badge}</div>
+            <h3 style="font-size: 19px; font-weight: 800; color: #102D46; margin: 4px 0 8px 0;">
+              <a href="/airports/${b.slug}/" style="color: inherit; text-decoration: none;">${b.name}</a>
+            </h3>
+            <p style="font-size: 13.5px; color: #647B8C; line-height: 1.6; margin-bottom: 14px;">${b.tagline}</p>
+            <div style="font-size: 13px; color: #263E50; margin-bottom: 16px;">
+              <div>月付：${b.minMonthlyPrice ? `¥${b.minMonthlyPrice}/月` : '无直购月付'}</div>
+              <div>年付：${b.minYearlyPrice ? `¥${b.minYearlyPrice}/年` : '无独立年付'}</div>
+            </div>
+            <a href="/airports/${b.slug}/" class="btn-secondary" style="padding: 8px 14px; font-size: 13.5px; width: 100%; text-align: center;">
+              查看品牌档案 →
+            </a>
+          </div>
+        `).join('');
+        return;
+      }
+
+      // Filter brands
+      const matchedBrands = allBrands.filter(b => 
+        b.name.toLowerCase().includes(q) ||
+        b.englishName.toLowerCase().includes(q) ||
+        (b.aliases && b.aliases.toLowerCase().includes(q)) ||
+        b.tagline.toLowerCase().includes(q) ||
+        b.networkTypes.some(n => n.toLowerCase().includes(q)) ||
+        b.protocols.some(p => p.toLowerCase().includes(q))
+      );
+
+      // Filter options
+      const matchedOptions = allOptions.filter(o => 
+        o.planName.toLowerCase().includes(q) ||
+        o.brandName.toLowerCase().includes(q) ||
+        o.periodName.toLowerCase().includes(q) ||
+        o.trafficText.toLowerCase().includes(q)
+      );
+
+      const totalMatches = matchedBrands.length + matchedOptions.length;
+      statusText.innerHTML = `搜索 “<span style="color: #07886E;">${q}</span>” 找到 ${totalMatches} 个相关结果：`;
+
+      if (totalMatches === 0) {
+        resultsGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: 48px; text-align: center; background: #F8FBFE; border: 1.5px dashed #DCE7EC; border-radius: 18px;">
+            <div style="font-size: 36px; margin-bottom: 12px;">🔍</div>
+            <div style="font-size: 18px; font-weight: 800; color: #102D46;">未检索到相关品牌或套餐</div>
+            <div style="font-size: 14px; color: #647B8C; margin-top: 6px;">您可以尝试简短的关键词，如“月付”、“20”、“专线”或“Clash”。</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+
+      // Render matched brands first
+      matchedBrands.forEach(b => {
+        html += `
+          <div class="smart-card" style="padding: 24px; border: 2px solid #10B89A;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span class="badge-pill" style="font-size: 11.5px;">品牌匹配</span>
+              <span style="font-size: 12.5px; color: #647B8C;">${b.badge}</span>
+            </div>
+            <h3 style="font-size: 20px; font-weight: 800; color: #102D46; margin: 0 0 8px 0;">
+              <a href="/airports/${b.slug}/" style="color: inherit; text-decoration: none;">${b.name} (${b.englishName})</a>
+            </h3>
+            <p style="font-size: 13.5px; color: #647B8C; line-height: 1.6; margin-bottom: 14px;">${b.tagline}</p>
+            <div style="display: flex; gap: 8px;">
+              <a href="/airports/${b.slug}/" class="btn-primary" style="flex: 1; padding: 8px 12px; font-size: 13.5px; text-align: center;">
+                查看品牌全貌
+              </a>
+              <a href="${b.purchaseUrl}" target="_blank" rel="sponsored nofollow noopener" class="btn-secondary" style="flex: 1; padding: 8px 12px; font-size: 13.5px; text-align: center;">
+                官网入口
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      // Render matched options
+      matchedOptions.slice(0, 30).forEach(opt => {
+        html += `
+          <div class="smart-card" style="padding: 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <span style="font-size: 12px; font-weight: 700; color: #10B89A;">${opt.brandName}</span>
+              <span class="badge-pill" style="font-size: 11px; padding: 2px 8px;">${opt.periodName}</span>
+            </div>
+            <h4 style="font-size: 17.5px; font-weight: 800; color: #102D46; margin: 0 0 10px 0;">
+              ${opt.planName}
+            </h4>
+            <div style="background: #F8FBFE; padding: 10px 12px; border-radius: 10px; margin-bottom: 14px; font-size: 13px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span>实付金额：</span>
+                <strong style="color: #102D46;">¥${opt.totalPrice}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                <span>额度配额：</span>
+                <strong>${opt.trafficText}</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                <span>折合月均：</span>
+                <strong style="color: #07886E;">${opt.monthlyCost ? `¥${opt.monthlyCost}/月` : '买断'}</strong>
+              </div>
+            </div>
+            <a href="/airports/${opt.brandId}/" class="btn-secondary" style="width: 100%; padding: 8px 0; font-size: 13px; text-align: center;">
+              查看所属品牌档案 →
+            </a>
+          </div>
+        `;
+      });
+
+      resultsGrid.innerHTML = html;
+    }
+
+    input.addEventListener('input', doSearch);
+    clearBtn.addEventListener('click', () => {
+      input.value = '';
+      doSearch();
+      input.focus();
+    });
+
+    tagBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        input.value = btn.getAttribute('data-kw');
+        doSearch();
+      });
+    });
+
+    doSearch();
+  </script>
+</Layout>

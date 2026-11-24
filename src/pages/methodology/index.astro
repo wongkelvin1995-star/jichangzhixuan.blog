@@ -1,0 +1,94 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "推荐标准与数据方法学｜机场智选客观评估准则";
+const pageDesc = "详细公开机场智选的品牌收录标准、套餐数据采集规范、编辑排序机制、智能匹配算法与成本计算公式，接受全网用户监督。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/methodology/"
+  breadcrumbs={[
+    { name: '推荐标准', url: '/methodology/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">评估准则公开</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          推荐标准、数据方法学与评估规范
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          为了让每一位用户清楚了解网站信息的生成过程，我们在此完全公开品牌档案的采录维度、编辑推荐排序标准以及底层算法的计算公式。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="article-container article-content">
+      
+      <h2>一、品牌收录与资料采录标准</h2>
+      <p>
+        机场智选收录的机场品牌必须满足以下基础门槛：
+      </p>
+      <ul>
+        <li>具有可追溯的公开运营记录或明确的套餐价目表；</li>
+        <li>具备可查证的客户支持渠道（如网页在线客服、工单系统或社区答疑）；</li>
+        <li>价格标注明确，不采用隐蔽扣费或强制捆绑无关增值服务；</li>
+        <li>在本次收录中，必须通过 23 个维度的完整资料整理，包括线路架构、支持协议、客户端兼容、第三方订阅授权条件、退款政策及已知不足。</li>
+      </ul>
+
+      <h2>二、套餐价格与选项核算规范</h2>
+      <p>
+        在套餐价格的记录上，我们坚持以下绝对严谨标准：
+      </p>
+      <ul>
+        <li><strong>保留原始精度：</strong> 所有价格以人民币（CNY）为基准，原始报价为 ¥19.99 则如实标注为 ¥19.99，绝不为了视觉简化而四舍五入为 ¥19 或 ¥20；</li>
+        <li><strong>周期实付与折算分离：</strong> 必须明确区分整期实付与折合月均。例如年付 ¥99 套餐，折合虽为 ¥8.25/月，但在价格表中必须醒目标注“单次实付 ¥99，按年支付”，严禁宣传为“8元月付机场”；</li>
+        <li><strong>空值审慎处理：</strong> 服务商未公布的周期（如某套餐不提供月付或半年付）在数据库中保留为 null / 破折号，绝不填充为零；公开资料未列独立价目的说明行，不计入真实套餐统计；</li>
+        <li><strong>标注记录日期：</strong> 历史报价均注明采集日期（如 2026-11-17 或 2026-11-24），提示用户动态后台价格可能存在浮动。</li>
+      </ul>
+
+      <h2>三、编辑推荐排序规则</h2>
+      <p>
+        全站首页与推荐榜单中的默认排序属于<strong>「编辑推荐顺序」</strong>，其考量权重由以下要素构成：
+      </p>
+      <ol>
+        <li><strong>价格体系健全度（25%）：</strong> 是否具备平价的月付或百元内轻量年付，给用户充足的试错空间；</li>
+        <li><strong>线路稳定性口碑（25%）：</strong> 是否拥有 IEPL/IPLC 专线或多线 BGP 冗余架构，晚高峰抗干扰能力表现；</li>
+        <li><strong>客户端及订阅政策透明度（25%）：</strong> 对官方客户端与第三方 Clash / Shadowrocket 订阅的开放说明是否清晰；</li>
+        <li><strong>售后支持与纠错响应（25%）：</strong> 客服渠道是否畅通，对故障与政策变更的告知态度。</li>
+      </ol>
+      <p>
+        <em>重要提醒：编辑推荐排序不代表独立物理机房的千兆测速跑分，亦不构成对任何品牌 100% 连通率的担保。</em>
+      </p>
+
+      <h2>四、智能匹配与成本计算公式</h2>
+      <p>
+        本站六大智能工具严格依据以下公开公式计算：
+      </p>
+      <ul>
+        <li><strong>折合月均成本：</strong> <code>月均成本 = 整期实付金额 ÷ 对应计费月数</code></li>
+        <li><strong>名义单位流量成本：</strong> <code>名义每GB成本 = 折合月均成本 ÷ 每月套餐配额(GB)</code></li>
+        <li><strong>实际使用每GB成本：</strong> <code>实际成本 = 折合月均成本 ÷ 每月实际消耗流量(GB)</code></li>
+        <li><strong>一次性买断包单价：</strong> <code>一次性每GB成本 = 购买总价 ÷ 总流量(GB)</code></li>
+        <li><strong>流量利用率：</strong> <code>利用率 = (实际使用量 ÷ 套餐配额) × 100%</code></li>
+      </ul>
+
+      <h2>五、商业推广与独立评测界限</h2>
+      <p>
+        我们郑重说明：本站运营方可能从部分品牌产生推广推荐佣金以维持服务器高防与 CDN 开销。但我们坚决执行<strong>「商业利益不干涉数据真伪」</strong>的原则：
+      </p>
+      <ul>
+        <li>存在不足和使用限制的品牌，档案中必须照实披露，不作粉饰；</li>
+        <li>第三方订阅存在门槛的品牌（如灵动云需约200元门槛），必须显著警示；</li>
+        <li>没有专属 AFF 链接的品牌（如大佬云），如实使用官方入口，不套用其他邀请码；</li>
+        <li>智能套餐匹配工具完全由数据字段运算，绝不强行将商业合作排在筛选结果首位。</li>
+      </ul>
+
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,100 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import rankings from '../../data/rankings.json';
+
+const pageTitle = "2026机场品牌大全与推荐目录｜机场智选";
+const pageDesc = "收录18家主流机场品牌完整档案与套餐数据库，涵盖灵动云、暮光加速、微风网络等，提供客观优缺点分析、套餐起价、第三方订阅开放政策与理性购买建议。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/airports/"
+  breadcrumbs={[
+    { name: '品牌推荐', url: '/airports/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 800px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">品牌资料库</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          2026 机场品牌大全与精选目录
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          整理 18 家主流机场品牌的真实服务配置、月付与年付起步价、网络协议及第三方客户端兼容政策。坚持数据透明、杜绝虚假宣传，帮助你根据自身预算与设备作出明智决定。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <div class="grid-3">
+        {rankings.map(b => {
+          const brandObj = brands.find(x => x.slug === b.slug)!;
+          return (
+            <div class="smart-card" style="padding: 28px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="width: 48px; height: 48px; border-radius: 14px; background: #E4F0F6; color: #102D46; font-size: 20px; font-weight: 900; display: flex; align-items: center; justify-content: center;">
+                      {b.name.charAt(0)}
+                    </div>
+                    <div>
+                      <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin: 0;">
+                        <a href={`/airports/${b.slug}/`} style="color: inherit; text-decoration: none;">{b.name}</a>
+                      </h2>
+                      <div style="font-size: 13px; color: #647B8C;">{b.englishName}</div>
+                    </div>
+                  </div>
+                  <span class="badge-pill" style="font-size: 12px;">
+                    {b.badge}
+                  </span>
+                </div>
+
+                <p style="font-size: 14px; color: #647B8C; line-height: 1.65; margin-bottom: 18px;">
+                  {b.tagline}
+                </p>
+
+                <!-- Pricing Box -->
+                <div style="background: #F8FBFE; border: 1px solid #EEF3F7; border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; font-size: 13.5px;">
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                    <span style="color: #647B8C;">月付起步：</span>
+                    <strong style="color: #102D46;">
+                      {b.minMonthlyPrice ? `¥${b.minMonthlyPrice}/月 (${b.minMonthlyTraffic})` : '无直购月付'}
+                    </strong>
+                  </div>
+                  <div style="display: flex; justify-content: space-between;">
+                    <span style="color: #647B8C;">年付门槛：</span>
+                    <strong style="color: #07886E;">
+                      {b.minYearlyPrice ? `¥${b.minYearlyPrice}/年 (${b.minYearlyTraffic})` : '无独立年付'}
+                    </strong>
+                  </div>
+                </div>
+
+                <!-- Features -->
+                <div style="font-size: 13px; color: #263E50; margin-bottom: 20px;">
+                  <div style="margin-bottom: 4px;"><strong>线路协议：</strong> {b.networkTypes.join('、')}</div>
+                  <div><strong>第三方订阅：</strong> {brandObj.subPolicy.provided.includes('客服') ? '有条件/需客服确认' : '依官方规则'}</div>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; border-top: 1px solid #EEF3F7; padding-top: 16px;">
+                <a href={`/airports/${b.slug}/`} class="btn-secondary" style="flex: 1; padding: 9px 12px; font-size: 14px;">
+                  完整档案评测
+                </a>
+                <a href={b.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 9px 12px; font-size: 14px;">
+                  官网入口
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+    </div>
+  </section>
+</Layout>

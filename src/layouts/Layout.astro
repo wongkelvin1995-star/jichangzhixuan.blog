@@ -1,0 +1,151 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  structuredData?: Record<string, any> | Array<Record<string, any>>;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogType = 'website',
+  ogImage = 'https://jichangzhixuan.blog/og/default.png',
+  breadcrumbs,
+  structuredData,
+  noindex = false
+} = Astro.props;
+
+const siteUrl = 'https://jichangzhixuan.blog';
+const currentUrl = canonical || (Astro.url.pathname.endsWith('/') ? `${siteUrl}${Astro.url.pathname}` : `${siteUrl}${Astro.url.pathname}/`);
+
+// Default JSON-LD for WebSite and Organization
+const baseSchema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    'name': '机场智选',
+    'alternateName': 'SmartChoice MAX · 机场智选',
+    'url': siteUrl,
+    'description': '汇集热门机场品牌与真实套餐数据，提供智能机场筛选、套餐价格对比与理性选购指南。',
+    'inLanguage': 'zh-CN',
+    'potentialAction': {
+      '@type': 'SearchAction',
+      'target': `${siteUrl}/search/?q={search_term_string}`,
+      'query-input': 'required name=search_term_string'
+    }
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    'name': '机场智选',
+    'url': siteUrl,
+    'logo': `${siteUrl}/images/logo-icon.svg`,
+    'slogan': '聪明选择，不必多花。'
+  }
+];
+
+// Add BreadcrumbList schema if provided
+if (breadcrumbs && breadcrumbs.length > 0) {
+  baseSchema.push({
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': breadcrumbs.map((b, idx) => ({
+      '@type': 'ListItem',
+      'position': idx + 1,
+      'name': b.name,
+      'item': b.url.startsWith('http') ? b.url : `${siteUrl}${b.url}`
+    }))
+  });
+}
+
+// Merge additional custom structured data
+const allStructuredData = structuredData
+  ? (Array.isArray(structuredData) ? [...baseSchema, ...structuredData] : [...baseSchema, structuredData])
+  : baseSchema;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={currentUrl} />
+    
+    {noindex ? (
+      <meta name="robots" content="noindex, nofollow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={currentUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="zh_CN" />
+    <meta property="og:site_name" content="机场智选" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={currentUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Bing Site Auth & Meta -->
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+
+    <!-- Structured Data JSON-LD -->
+    {allStructuredData.map(schema => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body>
+    <Header currentPath={Astro.url.pathname} />
+    
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <div style="background: #FFFFFF; border-bottom: 1px solid #DCE7EC; padding: 10px 0;">
+        <div class="max-container">
+          <nav aria-label="面包屑导航" style="display: flex; align-items: center; gap: 8px; font-size: 13.5px; color: #647B8C; flex-wrap: wrap;">
+            <a href="/" style="color: #647B8C; text-decoration: none;">首页</a>
+            {breadcrumbs.map((crumb, idx) => (
+              <>
+                <span>/</span>
+                {idx === breadcrumbs.length - 1 ? (
+                  <span style="color: #102D46; font-weight: 600;" aria-current="page">{crumb.name}</span>
+                ) : (
+                  <a href={crumb.url} style="color: #647B8C; text-decoration: none;">{crumb.name}</a>
+                )}
+              </>
+            ))}
+          </nav>
+        </div>
+      </div>
+    )}
+
+    <main id="main-content" style="flex: 1 0 auto;">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
+</html>

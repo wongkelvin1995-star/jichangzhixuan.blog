@@ -1,0 +1,120 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "机场智选工具中心｜六大智能选购、成本计算与品牌对比工具";
+const pageDesc = "提供Smart Match智能选机场、月度流量需求计算器、套餐实际成本计算器、月付年付对比、多品牌横向对比与流量利用率防浪费分析六大独立专业工具。";
+
+const toolsList = [
+  {
+    title: 'Smart Match 智能选机场',
+    href: '/smart-match/',
+    badge: '旗舰核心工具',
+    icon: '🎯',
+    desc: '输入你的每月预算、流量需求、设备平台与使用场景，系统自动匹配全库18家品牌与146条套餐，剔除不合规与存在暗扣的选项。',
+    features: ['预算与付款周期精准过滤', '设备与第三方Clash订阅兼容校验', '按综合匹配度与真实月均成本排序']
+  },
+  {
+    title: '月度流量需求计算器',
+    href: '/tools/traffic-calculator/',
+    badge: '需求测算',
+    icon: '📊',
+    desc: '根据每日网页浏览、视频播放时长与清晰度（1080P/4K）、AI交互及下载量，精准估算每月真实流量消耗与安全预留量。',
+    features: ['可调整视频清晰度与码率', '计算节点倍率影响', '即时给出推荐满足条件的套餐']
+  },
+  {
+    title: '机场套餐实际成本计算器',
+    href: '/tools/cost-calculator/',
+    badge: '成本透视',
+    icon: '💰',
+    desc: '打破名义单价迷思！不仅计算整期实付与折合月均，更算出你实际使用每1GB的真实花费，杜绝为闲置流量买单。',
+    features: ['折合月均成本公式拆解', '名义单价 vs 实际使用单价', '超量警示与优惠券折扣折算']
+  },
+  {
+    title: '月付与年付成本对比工具',
+    href: '/tools/billing-calculator/',
+    badge: '周期决策',
+    icon: '⚖️',
+    desc: '比较连续月付12个月的总支出与年付一次性预付金额。直观呈现周期差额，并提示长期预付款的沉没与停服风险。',
+    features: ['月付 vs 季付 vs 年付现金流对比', '实际折扣率精确核算', '沉没资金与退款限制风险评估']
+  },
+  {
+    title: '机场品牌多维度横向对比',
+    href: '/compare/',
+    badge: '横向PK',
+    icon: '🔍',
+    desc: '自由选择2至4个机场品牌，在同屏进行起步价、节点覆盖、协议线路、客户端兼容、AI流媒体及售后政策的逐项对比。',
+    features: ['同屏横向对比表格', '高亮相同与差异参数', '买前限制与适合人群清晰对标']
+  },
+  {
+    title: '流量利用率与防浪费分析',
+    href: '/tools/traffic-efficiency/',
+    badge: '理性优化',
+    icon: '📉',
+    desc: '输入当前在用套餐的价格与每月实际剩余流量，评估是否存在“大马拉小车”的容量浪费，提供降档或转为不限时包的合理建议。',
+    features: ['流量利用率百分比测算', '月度闲置资金损失统计', '精准降档方案推介']
+  }
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/tools/"
+  breadcrumbs={[
+    { name: '智选工具', url: '/tools/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 800px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">专业量化分析</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场智选专业选购与成本计算工具中心
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          六大真实开发的交互工具，依托全站统一的结构化套餐数据库。帮助用户算清每一笔账、核实每一项兼容性，用量化数据代替主观猜测。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div class="grid-3">
+        {toolsList.map(tool => (
+          <div class="smart-card" style="padding: 32px 28px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px;">
+                <span style="font-size: 32px;">{tool.icon}</span>
+                <span class="badge-pill" style="font-size: 12px;">{tool.badge}</span>
+              </div>
+
+              <h2 style="font-size: 21px; font-weight: 800; color: #102D46; margin-bottom: 12px;">
+                <a href={tool.href} style="color: inherit; text-decoration: none;">{tool.title}</a>
+              </h2>
+
+              <p style="font-size: 14.5px; color: #647B8C; line-height: 1.7; margin-bottom: 20px;">
+                {tool.desc}
+              </p>
+
+              <ul style="list-style: none; padding: 0; margin: 0 0 24px 0; font-size: 13.5px; color: #263E50; display: flex; flex-direction: column; gap: 8px;">
+                {tool.features.map(f => (
+                  <li style="display: flex; gap: 8px;">
+                    <span style="color: #10B89A;">✓</span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <a href={tool.href} class="btn-primary" style="width: 100%; padding: 11px 0; font-size: 14.5px; text-align: center;">
+                立即使用该工具 →
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>

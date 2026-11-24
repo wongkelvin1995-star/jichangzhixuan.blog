@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Rounded Square background with soft emerald glow -->
+  <rect width="48" height="48" rx="14" fill="#102D46" />
+  <!-- Green Jet Silhouette -->
+  <g transform="translate(6, 6)">
+    <path d="M4 20L15 18.5L24 7L28.5 8L21 18.5L29 20L33 15.5L36 16.5L34 21L36 25.5L33 26.5L29 22L21 23.5L28.5 34L24 35L15 23.5L4 22C1.5 21.7 1.5 20.3 4 20Z" fill="#10B89A"/>
+    <circle cx="34" cy="21" r="1.5" fill="#FFFFFF"/>
+  </g>
+</svg>

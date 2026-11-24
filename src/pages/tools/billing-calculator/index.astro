@@ -1,0 +1,190 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import brands from '../../../data/brands.json';
+
+const pageTitle = "机场月付与年付成本对比计算器｜周期差额与风险决策";
+const pageDesc = "全周期成本量化对比。输入月付与年付价格，直观对比连续月付12个月总成本与年付整期实付，计算真实折扣率，评估资金沉没与退款风险。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/tools/billing-calculator/"
+  breadcrumbs={[
+    { name: '智选工具', url: '/tools/' },
+    { name: '月付年付对比工具', url: '/tools/billing-calculator/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">周期决策工具</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场月付 vs 年付全周期成本对比
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          究竟是“细水长流”的月付更安全，还是“一次付清”的年付更省钱？输入具体的周期价格，量化年付的真实节省额与潜在资金沉没风险。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; align-items: start;">
+        
+        <!-- Controls -->
+        <div class="smart-card" style="padding: 32px; background: #F8FBFE; border: 1.5px solid #DCE7EC;">
+          <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 24px;">
+            ⚖️ 输入周期价格参数
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                单月支付价格 (元/月)
+              </label>
+              <input id="input-monthly" type="number" min="1" step="1" value="20" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                整年支付价格 (元/年)
+              </label>
+              <input id="input-yearly" type="number" min="1" step="1" value="180" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                季付价格 (可选，元/季，留空按月付×3)
+              </label>
+              <input id="input-quarterly" type="number" min="1" step="1" placeholder="例如 57" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <div style="padding: 16px; background: #FFFFFF; border-radius: 12px; border: 1px solid #DCE7EC; font-size: 13.5px; color: #647B8C; line-height: 1.6;">
+              <strong>典型案例对比：</strong><br/>
+              • 灵动云：拂风月付 ¥20 (年累计¥240) vs 穿云年付 ¥99 (省¥141，需注意穿云为70GB)<br/>
+              • 暮光加速：月付 ¥20 (年累计¥240) vs IPLC年付 ¥109 (省¥131)<br/>
+              • 微风网络：月付 ¥25 (年累计¥300) vs 年付 ¥137 (省¥163)
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Result -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <div class="smart-card" style="padding: 32px; background: #102D46; color: #FFFFFF;">
+            <span style="font-size: 12px; font-weight: 700; color: #10B89A; letter-spacing: 0.08em; text-transform: uppercase;">
+              ANNUAL COMPARISON
+            </span>
+            <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-top: 4px; margin-bottom: 24px;">
+              对比核算结果
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+              
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">连续月付 12 个月总支出</div>
+                <div id="res-monthly-total" style="font-size: 26px; font-weight: 900; color: #FFFFFF; margin-top: 4px;">
+                  ¥240
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">年付一次性实付</div>
+                <div id="res-yearly-total" style="font-size: 26px; font-weight: 900; color: #10B89A; margin-top: 4px;">
+                  ¥180
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">年付可节省金额</div>
+                <div id="res-saved" style="font-size: 24px; font-weight: 800; color: #07886E; margin-top: 4px;">
+                  ¥60
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">年付折算月均单价</div>
+                <div id="res-effective-monthly" style="font-size: 24px; font-weight: 800; color: #FFFFFF; margin-top: 4px;">
+                  ¥15.00 / 月
+                </div>
+              </div>
+
+            </div>
+
+            <div id="risk-evaluation" style="background: rgba(255, 255, 255, 0.08); padding: 16px; border-radius: 12px; font-size: 14px; color: #DCE7EC; line-height: 1.6;">
+              计算详情：年付相当于打 7.5 折。
+            </div>
+
+          </div>
+
+          <!-- Decision matrix -->
+          <div class="smart-card" style="padding: 24px; background: #FFFFFF;">
+            <h4 style="font-size: 16px; font-weight: 800; color: #102D46; margin-bottom: 12px;">
+              ⚖️ 机场智选决策准则：你应该选月付还是年付？
+            </h4>
+            <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #263E50; line-height: 1.6;">
+              <div>
+                <strong>坚决选择月付的情况：</strong><br/>
+                ① 刚接触该机场，从未在本地宽带环境下实测晚高峰；<br/>
+                ② 该品牌成立时间较短（少于1年），运营稳定性有待长期观察；<br/>
+                ③ 您的网络使用属于阶段性（如仅在考研、寒暑假或某个项目期间使用）。
+              </div>
+              <div style="border-top: 1px solid #EEF3F7; padding-top: 8px;">
+                <strong>可以考虑年付的情况：</strong><br/>
+                ① 已经连续月付使用 2-3 个月以上，晚高峰速度与售后响应完全满意；<br/>
+                ② 属于大品牌成熟平台，年付实付金额在个人可承受损失范围内；<br/>
+                ③ 确信未来一年具有刚性海外网络需求。
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const mInput = document.getElementById('input-monthly');
+    const yInput = document.getElementById('input-yearly');
+    const qInput = document.getElementById('input-quarterly');
+
+    const resMTotal = document.getElementById('res-monthly-total');
+    const resYTotal = document.getElementById('res-yearly-total');
+    const resSaved = document.getElementById('res-saved');
+    const resEffMonthly = document.getElementById('res-effective-monthly');
+    const riskEval = document.getElementById('risk-evaluation');
+
+    function calculate() {
+      const monthly = parseFloat(mInput.value) || 0;
+      const yearly = parseFloat(yInput.value) || 0;
+
+      const monthly12 = Number((monthly * 12).toFixed(2));
+      const saved = Number((monthly12 - yearly).toFixed(2));
+      const effMonthly = Number((yearly / 12).toFixed(2));
+      const discountPct = Math.round((yearly / monthly12) * 100);
+
+      resMTotal.textContent = `¥${monthly12}`;
+      resYTotal.textContent = `¥${yearly}`;
+      resSaved.textContent = saved > 0 ? `¥${saved}` : `¥0 (年付无优惠)`;
+      resEffMonthly.textContent = `¥${effMonthly} / 月`;
+
+      if (saved > 0) {
+        riskEval.innerHTML = `
+          <strong>收益与风险核算：</strong><br/>
+          年付整年可节省 ¥${saved}，相当于打 ${discountPct / 10} 折。<br/>
+          <strong>但是：</strong>您需要一次性预付 ¥${yearly} 现金。如果该机场在第 4 个月出现故障或停止运营，您实际将损失约 ¥${Math.round(yearly * 8 / 12)} 的预付款！请务必综合权衡。
+        `;
+      } else {
+        riskEval.textContent = '当前设置的年付价格未体现出相对月付的优惠，强烈建议直接按月购买以规避预付款风险！';
+      }
+    }
+
+    [mInput, yInput, qInput].forEach(el => el.addEventListener('input', calculate));
+    calculate();
+  </script>
+</Layout>

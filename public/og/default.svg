@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#F4F9FC"/>
+  
+  <!-- Subtle Gradient Glow -->
+  <circle cx="950" cy="180" r="400" fill="#E4F0F6" opacity="0.8"/>
+  <circle cx="200" cy="500" r="300" fill="#10B89A" opacity="0.08"/>
+  <circle cx="1050" cy="450" r="250" fill="#10B89A" opacity="0.12"/>
+  
+  <!-- Decorative Grid / Circles -->
+  <circle cx="600" cy="315" r="500" stroke="#DCE7EC" stroke-width="1.5" stroke-dasharray="8 8" opacity="0.5"/>
+  <circle cx="600" cy="315" r="350" stroke="#DCE7EC" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Brand Card Container -->
+  <rect x="120" y="90" width="960" height="450" rx="28" fill="#FFFFFF" stroke="#DCE7EC" stroke-width="2"/>
+  
+  <!-- Brand Badge -->
+  <rect x="180" y="145" width="220" height="42" rx="21" fill="#E4F0F6"/>
+  <text x="290" y="172" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="16" font-weight="700" fill="#07886E" text-anchor="middle">SmartChoice MAX 旗舰版</text>
+  
+  <!-- Brand Icon -->
+  <rect x="180" y="215" width="76" height="76" rx="22" fill="#102D46"/>
+  <circle cx="218" cy="253" r="24" stroke="#10B89A" stroke-width="3" stroke-dasharray="5 5" opacity="0.7"/>
+  <path d="M204 254L214 264L232 242" stroke="#10B89A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- Title -->
+  <text x="280" y="255" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif" font-size="46" font-weight="900" fill="#102D46" letter-spacing="-0.02em">机场智选</text>
+  <text x="280" y="285" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="20" font-weight="700" fill="#10B89A" letter-spacing="0.05em">Airport SmartChoice · https://jichangzhixuan.blog</text>
+  
+  <!-- Tagline -->
+  <text x="180" y="360" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif" font-size="34" font-weight="800" fill="#102D46">聪明选择，不必多花。</text>
+  <text x="180" y="405" font-family="-apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif" font-size="20" font-weight="500" fill="#647B8C">18家热门品牌 · 146条套餐记录 · 智能选购与理性消费指南</text>
+  
+  <!-- Feature Pills -->
+  <g transform="translate(180, 440)">
+    <rect x="0" y="0" width="160" height="38" rx="19" fill="#F4F9FC" stroke="#DCE7EC" stroke-width="1.5"/>
+    <text x="80" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#263E50" text-anchor="middle">✓ 智能套餐筛选</text>
+    
+    <rect x="175" y="0" width="160" height="38" rx="19" fill="#F4F9FC" stroke="#DCE7EC" stroke-width="1.5"/>
+    <text x="255" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#263E50" text-anchor="middle">✓ 真实价格对比</text>
+    
+    <rect x="350" y="0" width="160" height="38" rx="19" fill="#F4F9FC" stroke="#DCE7EC" stroke-width="1.5"/>
+    <text x="430" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#263E50" text-anchor="middle">✓ 流量成本测算</text>
+
+    <rect x="525" y="0" width="160" height="38" rx="19" fill="#F4F9FC" stroke="#DCE7EC" stroke-width="1.5"/>
+    <text x="605" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" font-weight="600" fill="#263E50" text-anchor="middle">✓ 理性购买建议</text>
+  </g>
+</svg>

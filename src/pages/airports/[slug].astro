@@ -1,0 +1,521 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import plans from '../../data/plans.json';
+import options from '../../data/options.json';
+
+export async function getStaticPaths() {
+  return brands.map((brand) => {
+    const brandPlans = plans.filter((p) => p.brandId === brand.id);
+    const brandOptions = options.filter((o) => o.brandId === brand.id);
+    return {
+      params: { slug: brand.slug },
+      props: { brand, brandPlans, brandOptions }
+    };
+  });
+}
+
+const { brand, brandPlans, brandOptions } = Astro.props;
+
+// Filter plans by category
+const monthlyPlans = brandOptions.filter((o: any) => o.periodName === '月付' || o.periodMonths === 1);
+const mediumPlans = brandOptions.filter((o: any) => o.periodName === '季付' || o.periodName === '半年付' || o.periodMonths === 3 || o.periodMonths === 6);
+const longPlans = brandOptions.filter((o: any) => o.periodName === '年付' || o.periodName === '两年付' || o.periodName === '三年付' || o.periodMonths >= 12);
+const onetimePlans = brandOptions.filter((o: any) => o.planType === 'onetime');
+const customPlans = brandOptions.filter((o: any) => o.planType === 'custom');
+
+// Generate 5-8 Brand specific FAQs
+const brandFaqs = [
+  {
+    q: `${brand.name}最低多少钱可以开始使用？`,
+    a: brand.minMonthlyPrice 
+      ? `${brand.name}的月付入门套餐起步价为 ¥${brand.minMonthlyPrice}/月（对应额度 ${brand.minMonthlyTraffic || '标准流量'}）。对于希望先轻度测试连接质量与速度的用户，建议优先通过月付方式体验，满意后再根据需求考虑长周期。`
+      : `${brand.name}在本次记录的公开资料中未提供单独的标准月付，其长周期入门为 ¥${brand.minYearlyPrice}/年（对应 ${brand.minYearlyTraffic || '轻量额度'}），一次性实付相对可控。`
+  },
+  {
+    q: `${brand.name}是否支持Clash或Shadowrocket等第三方客户端？`,
+    a: brand.subPolicy.provided.includes('客服') || brand.subPolicy.restrictions.includes('门槛') || brand.subPolicy.provided.includes('未')
+      ? `${brand.name}对第三方客户端订阅有一定限制或特殊政策。根据资料记录：${brand.subPolicy.provided}。如果需要导入Clash或Shadowrocket，${brand.subPolicy.restrictions || '请在购买前务必向官方客服核对当前支持政策'}，官方客户端通常是首选推荐接入途径。`
+      : `${brand.name}支持主流通用客户端配置，但在导入Clash、Mihomo或Shadowrocket时，仍需遵守该品牌当期的节点与订阅分发规则，建议购买后通过用户中心查阅最新导入指引。`
+  },
+  {
+    q: `${brand.name}适合用来看4K视频和使用AI工具吗？`,
+    a: `根据品牌公开资料，${brand.name}在节点配置上涵盖了${brand.regions.map((r: any) => r.name).slice(0, 4).join('、')}等地区。对于 ChatGPT、Claude 等 AI 工具以及 YouTube 流媒体具有相应的节点支持；但 YouTube 4K 超高清的实际体验强烈依赖用户本地出口宽带、运营商连通性及晚高峰骨干网负载，建议用户先进行单月测试。`
+  },
+  {
+    q: `${brand.name}允许多台设备同时在线使用吗？`,
+    a: `关于设备限制，资料记录显示：${brand.deviceLimits.maxOnline}。对于家庭多设备或团队分用需求，请务必关注是否限制单一IP并发或限制登录客户端数量，避免因超出上限引发连接被系统自动限制。`
+  },
+  {
+    q: `${brand.name}购买后支持退款或更换套餐吗？`,
+    a: `根据收集到的售后政策：${brand.refundPolicy.supportRefund}。网络代理服务多属于数字虚拟商品，通常不支持无理由退款，更换或补差价升级需视客服工单受理情况而定。强烈建议用户不要一次性大额预付款，理性消费。`
+  },
+  {
+    q: `${brand.name}与同预算其他机场相比有何特色？`,
+    a: `${brand.name}的主要优势体现在：${brand.advantages.slice(0, 2).join('；')}。而其需要留意的使用限制包括：${brand.limitations.slice(0, 2).join('；')}。用户可结合本站的「多品牌横向对比」工具进行细化比对。`
+  }
+];
+
+// Similar budget brands for comparison
+const otherBrands = brands.filter((b) => b.slug !== brand.slug).slice(0, 3);
+---
+
+<Layout
+  title={brand.seoTitle}
+  description={`${brand.name}机场怎么样？提供${brand.name}全部${brandPlans.length}条套餐记录与${brandOptions.length}项购买价格明细，分析月付起价¥${brand.minMonthlyPrice || '—'}、年付¥${brand.minYearlyPrice || '—'}、线路协议、客户端兼容及理性选购建议。`}
+  canonical={`https://jichangzhixuan.blog/airports/${brand.slug}/`}
+  breadcrumbs={[
+    { name: '品牌推荐', url: '/airports/' },
+    { name: brand.name, url: `/airports/${brand.slug}/` }
+  ]}
+>
+  <!-- Brand Detail Header Hero -->
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 24px;">
+        <div style="max-width: 820px;">
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+            <span class="badge-pill">{brand.badge}</span>
+            <span style="font-size: 13px; color: #647B8C;">档案更新日期：{brand.sources.updatedDate}</span>
+          </div>
+          
+          <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 16px;">
+            <div style="width: 64px; height: 64px; border-radius: 18px; background: #102D46; color: #10B89A; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 900; box-shadow: 0 8px 24px rgba(16, 45, 70, 0.15);">
+              {brand.name.charAt(0)}
+            </div>
+            <div>
+              <h1 style="font-size: clamp(28px, 4vw, 40px); font-weight: 900; color: #102D46; line-height: 1.2; margin: 0;">
+                {brand.name}
+              </h1>
+              <div style="font-size: 15px; color: #647B8C; margin-top: 4px;">
+                {brand.englishName} {brand.aliases ? `· 别名：${brand.aliases}` : ''}
+              </div>
+            </div>
+          </div>
+
+          <p style="font-size: 16.5px; color: #263E50; line-height: 1.8; margin-bottom: 24px;">
+            {brand.introduction}
+          </p>
+
+          <!-- Quick Specs Tags -->
+          <div style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 13.5px;">
+            <span style="padding: 6px 12px; background: #E4F0F6; border-radius: 8px; color: #07886E; font-weight: 600;">
+              网络线路：{brand.networkTypes.join(' / ')}
+            </span>
+            <span style="padding: 6px 12px; background: #E4F0F6; border-radius: 8px; color: #07886E; font-weight: 600;">
+              支持协议：{brand.protocols.join(' / ')}
+            </span>
+            <span style="padding: 6px 12px; background: #E4F0F6; border-radius: 8px; color: #07886E; font-weight: 600;">
+              节点倍率：{brand.sources.pricing.includes('倍率') ? '见倍率表' : '1.0x 或依节点列表'}
+            </span>
+          </div>
+        </div>
+
+        <!-- Buy / CTA Card -->
+        <div class="smart-card" style="padding: 28px; width: 100%; max-width: 340px; background: #FFFFFF;">
+          <div style="font-size: 13px; color: #647B8C; margin-bottom: 4px;">月付起步价格</div>
+          <div style="font-size: 32px; font-weight: 900; color: #102D46; line-height: 1; margin-bottom: 12px;">
+            {brand.minMonthlyPrice ? `¥${brand.minMonthlyPrice}` : '年付起'}
+            <span style="font-size: 14px; font-weight: 500; color: #647B8C;">
+              {brand.minMonthlyPrice ? `/月 (${brand.minMonthlyTraffic})` : ''}
+            </span>
+          </div>
+
+          <div style="font-size: 13px; color: #647B8C; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid #EEF3F7;">
+            年付轻量包：<strong style="color: #07886E;">{brand.minYearlyPrice ? `¥${brand.minYearlyPrice}/年 (${brand.minYearlyTraffic})` : '无独立年付'}</strong>
+          </div>
+
+          <a
+            href={brand.purchaseUrl}
+            target="_blank"
+            rel="sponsored nofollow noopener"
+            class="btn-primary"
+            style="width: 100%; padding: 13px 0; font-size: 15.5px; margin-bottom: 12px;"
+          >
+            访问 {brand.name} 官网
+          </a>
+
+          <div style="font-size: 12px; color: #8BA0B2; line-height: 1.5; text-align: center;">
+            {brand.affiliateDisclosure}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content Layout (Left Content, Right Sticky Nav) -->
+  <div class="max-container" style="padding-top: 48px; padding-bottom: 80px;">
+    <div style="display: grid; grid-template-columns: 1fr; gap: 48px;">
+      
+      <div class="article-content" style="max-width: 100%;">
+        
+        <!-- 01 & 02: 品牌定位与服务特点 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            一、品牌定位与服务特点
+          </h2>
+          <p style="font-size: 16px; color: #263E50; line-height: 1.8;">
+            <strong>定位概述：</strong>{brand.positioning}
+          </p>
+          <p style="font-size: 16px; color: #263E50; line-height: 1.8;">
+            <strong>核心服务：</strong>{brand.coreServices}
+          </p>
+          <p style="font-size: 16px; color: #263E50; line-height: 1.8;">
+            <strong>主要服务人群：</strong>{brand.targetAudience}
+          </p>
+        </section>
+
+        <!-- 03: 全部月付套餐 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            二、全部月付套餐及价格
+          </h2>
+          <p style="font-size: 15px; color: #647B8C; margin-bottom: 14px;">
+            以下为 {brand.name} 真实记录中的独立月付选项。月付支持随用随停，适合新手体验。
+          </p>
+          {monthlyPlans.length > 0 ? (
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>套餐名称</th>
+                    <th>月付价格</th>
+                    <th>月度额度</th>
+                    <th>名义每GB成本</th>
+                    <th>重置规则</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {monthlyPlans.map((p: any) => (
+                    <tr>
+                      <td style="font-weight: 700; color: #102D46;">{p.planName}</td>
+                      <td style="font-weight: 800; color: #07886E;">¥{p.totalPrice}</td>
+                      <td>{p.trafficText}</td>
+                      <td>{p.unitCostPerGB ? `¥${p.unitCostPerGB}/GB` : '—'}</td>
+                      <td>按月重置</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style="background: #F8FBFE; padding: 16px; border-radius: 12px; font-size: 14.5px; color: #647B8C;">
+              当前公开资料中，{brand.name} 未列出独立的按月直购套餐，建议关注季付或年付选项。
+            </div>
+          )}
+        </section>
+
+        <!-- 04: 全部季付及半年付套餐 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            三、全部季付与半年付套餐
+          </h2>
+          {mediumPlans.length > 0 ? (
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>套餐名称</th>
+                    <th>付款周期</th>
+                    <th>整期实付</th>
+                    <th>折合月均</th>
+                    <th>月度额度</th>
+                    <th>单位成本</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {mediumPlans.map((p: any) => (
+                    <tr>
+                      <td style="font-weight: 700; color: #102D46;">{p.planName}</td>
+                      <td>{p.periodName}</td>
+                      <td style="font-weight: 800;">¥{p.totalPrice}</td>
+                      <td style="color: #07886E; font-weight: 700;">¥{p.monthlyCost}/月</td>
+                      <td>{p.trafficText}</td>
+                      <td>{p.unitCostPerGB ? `¥${p.unitCostPerGB}/GB` : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style="background: #F8FBFE; padding: 16px; border-radius: 12px; font-size: 14.5px; color: #647B8C;">
+              当前资料中该品牌未提供独立的季付或半年付档位。
+            </div>
+          )}
+        </section>
+
+        <!-- 05: 全部年付及长周期套餐 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            四、全部年付及长周期套餐
+          </h2>
+          <p style="font-size: 15px; color: #647B8C; margin-bottom: 14px;">
+            年付单次支付金额较高，但折合每月成本通常更低。必须注意预付款沉没风险。
+          </p>
+          {longPlans.length > 0 ? (
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>套餐名称</th>
+                    <th>周期</th>
+                    <th>整期实付</th>
+                    <th>折合月均</th>
+                    <th>月度额度</th>
+                    <th>单位成本</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {longPlans.map((p: any) => (
+                    <tr>
+                      <td style="font-weight: 700; color: #102D46;">{p.planName}</td>
+                      <td>{p.periodName}</td>
+                      <td style="font-weight: 800; color: #102D46;">¥{p.totalPrice}</td>
+                      <td style="color: #07886E; font-weight: 700;">¥{p.monthlyCost}/月</td>
+                      <td>{p.trafficText}</td>
+                      <td>{p.unitCostPerGB ? `¥${p.unitCostPerGB}/GB` : '—'}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style="background: #F8FBFE; padding: 16px; border-radius: 12px; font-size: 14.5px; color: #647B8C;">
+              当前未收录该品牌的独立年付数据。
+            </div>
+          )}
+        </section>
+
+        <!-- 06: 一次性及不限时套餐 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            五、不限时及一次性流量套餐
+          </h2>
+          {onetimePlans.length > 0 ? (
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>套餐名称</th>
+                    <th>购买价格</th>
+                    <th>总流量配额</th>
+                    <th>单位流量单价</th>
+                    <th>有效期与限制说明</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {onetimePlans.map((p: any) => (
+                    <tr>
+                      <td style="font-weight: 700; color: #102D46;">{p.planName}</td>
+                      <td style="font-weight: 800; color: #07886E;">¥{p.totalPrice}</td>
+                      <td>{p.trafficText}</td>
+                      <td>{p.unitCostPerGB ? `¥${p.unitCostPerGB}/GB` : '—'}</td>
+                      <td style="font-size: 13.5px; color: #647B8C;">{p.limitNote || p.validity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style="background: #F8FBFE; padding: 16px; border-radius: 12px; font-size: 14.5px; color: #647B8C;">
+              公开资料未列独立一次性流量套餐。不能由未列价目推断该品牌必然不提供定制流量包。
+            </div>
+          )}
+        </section>
+
+        <!-- 07: 独享及私人定制套餐 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            六、独享及私人定制套餐
+          </h2>
+          {customPlans.length > 0 ? (
+            <div class="data-table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>定制套餐名称</th>
+                    <th>参考价格</th>
+                    <th>流量配额</th>
+                    <th>专属服务特点</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {customPlans.map((p: any) => (
+                    <tr>
+                      <td style="font-weight: 700; color: #102D46;">{p.planName}</td>
+                      <td style="font-weight: 800; color: #07886E;">¥{p.totalPrice}</td>
+                      <td>{p.trafficText}</td>
+                      <td style="font-size: 13.5px; color: #263E50;">{p.serviceFeature}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          ) : (
+            <div style="background: #F8FBFE; padding: 16px; border-radius: 12px; font-size: 14.5px; color: #647B8C;">
+              公开资料未列独立定制套餐价目，若有专属公网IP或独享带宽需求需单独联系官方客服确认。
+            </div>
+          )}
+        </section>
+
+        <!-- 08: 客户端与设备兼容 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            七、客户端与设备兼容情况
+          </h2>
+          <div class="data-table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>操作系统 / 客户端软件</th>
+                  <th>支持状态</th>
+                  <th>使用条件与接入说明</th>
+                </tr>
+              </thead>
+              <tbody>
+                {brand.clients.map((c: any) => (
+                  <tr>
+                    <td style="font-weight: 700; color: #102D46;">{c['操作系统或客户端']}</td>
+                    <td>
+                      <span style={`padding: 3px 10px; border-radius: 6px; font-size: 12.5px; font-weight: 600; background: ${c['支持情况'].includes('明确') || c['支持情况'].includes('有记录') ? '#E4F0F6' : '#FFF3E8'}; color: ${c['支持情况'].includes('明确') || c['支持情况'].includes('有记录') ? '#07886E' : '#B25E00'};`}>
+                        {c['支持情况']}
+                      </span>
+                    </td>
+                    <td style="font-size: 13.5px; color: #263E50;">{c['使用条件']}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 09: 第三方订阅链接政策 -->
+        <section style="margin-bottom: 48px; background: #F8FBFE; border: 1px solid #DCE7EC; border-radius: 18px; padding: 28px;">
+          <h2 style="font-size: 22px; font-weight: 800; color: #102D46; margin-bottom: 14px;">
+            八、第三方订阅链接开放政策（Clash / Shadowrocket）
+          </h2>
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 15px; color: #263E50;">
+            <li><strong>是否提供第三方订阅：</strong>{brand.subPolicy.provided}</li>
+            <li><strong>是否需要联系客服申请：</strong>{brand.subPolicy.needApply}</li>
+            <li><strong>哪些套餐支持：</strong>{brand.subPolicy.supportedPlans}</li>
+            <li><strong>最低消费门槛要求：</strong>{brand.subPolicy.minAmount || '未列明确最低金额'}</li>
+            <li><strong>是否必须使用官方客户端：</strong>{brand.subPolicy.mustOfficialClient}</li>
+            <li><strong>特殊使用限制与提醒：</strong>{brand.subPolicy.restrictions}</li>
+          </ul>
+        </section>
+
+        <!-- 10: 优势与不足 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            九、{brand.name} 品牌优势与使用限制
+          </h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <!-- Advantages -->
+            <div style="background: #F0FAF7; border: 1.5px solid #A2E5D4; border-radius: 18px; padding: 24px;">
+              <h3 style="font-size: 18px; font-weight: 800; color: #07886E; margin-bottom: 14px;">
+                ✓ 品牌主要优势
+              </h3>
+              <ul style="padding-left: 20px; font-size: 14.5px; color: #263E50; display: flex; flex-direction: column; gap: 8px;">
+                {brand.advantages.map((adv: string) => (
+                  <li>{adv}</li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Limitations -->
+            <div style="background: #FFF9F5; border: 1.5px solid #FAD6C3; border-radius: 18px; padding: 24px;">
+              <h3 style="font-size: 18px; font-weight: 800; color: #C05621; margin-bottom: 14px;">
+                ⚠ 品牌不足及使用限制
+              </h3>
+              <ul style="padding-left: 20px; font-size: 14.5px; color: #263E50; display: flex; flex-direction: column; gap: 8px;">
+                {brand.limitations.map((lim: string) => (
+                  <li>{lim}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11: 适合与不适合用户 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            十、适合与不适合哪些用户？
+          </h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
+            <div class="smart-card" style="padding: 24px;">
+              <h3 style="font-size: 18px; font-weight: 800; color: #102D46; margin-bottom: 12px;">
+                👍 建议考虑的用户
+              </h3>
+              <ul style="padding-left: 20px; font-size: 14.5px; color: #647B8C; display: flex; flex-direction: column; gap: 8px;">
+                {brand.suitableUsers.map((u: string) => (
+                  <li>{u}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="smart-card" style="padding: 24px;">
+              <h3 style="font-size: 18px; font-weight: 800; color: #102D46; margin-bottom: 12px;">
+                🚫 暂不建议购买的用户
+              </h3>
+              <ul style="padding-left: 20px; font-size: 14.5px; color: #647B8C; display: flex; flex-direction: column; gap: 8px;">
+                {brand.unsuitableUsers.map((u: string) => (
+                  <li>{u}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12: 退款与客服政策 -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+            十一、退款政策与售后支持渠道
+          </h2>
+          <div style="background: #FFFFFF; border: 1px solid #DCE7EC; border-radius: 16px; padding: 24px;">
+            <p style="font-size: 15px; color: #263E50; line-height: 1.8; margin-bottom: 12px;">
+              <strong>退款支持说明：</strong>{brand.refundPolicy.supportRefund}
+            </p>
+            <p style="font-size: 15px; color: #263E50; line-height: 1.8; margin-bottom: 12px;">
+              <strong>工单与在线客服：</strong>{brand.supportChannels.onlineSupport || brand.supportChannels.ticketSystem || '登录用户中心后查阅帮助中心'}
+            </p>
+            <p style="font-size: 15px; color: #263E50; line-height: 1.8;">
+              <strong>其他售后提醒：</strong>{brand.refundPolicy.otherAfterSales || '购买前请核对当期订单确认页面中的售后条款'}
+            </p>
+          </div>
+        </section>
+
+        <!-- 13: 品牌专享FAQ -->
+        <section style="margin-bottom: 48px;">
+          <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 20px;">
+            十二、{brand.name} 常见选购问答
+          </h2>
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            {brandFaqs.map((faq, idx) => (
+              <details class="smart-card" style="padding: 18px 22px; cursor: pointer;" open={idx === 0}>
+                <summary style="font-size: 16.5px; font-weight: 700; color: #102D46; display: flex; justify-content: space-between; list-style: none;">
+                  <span>{faq.q}</span>
+                  <span style="color: #10B89A;">+</span>
+                </summary>
+                <div style="margin-top: 12px; font-size: 14.5px; color: #263E50; line-height: 1.75; border-top: 1px solid #EEF3F7; padding-top: 12px;">
+                  {faq.a}
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
+
+        <!-- 14: 资料来源与免责声明 -->
+        <section style="padding: 24px; background: #F8FBFE; border: 1px solid #DCE7EC; border-radius: 16px; font-size: 13.5px; color: #647B8C; line-height: 1.7;">
+          <div style="font-weight: 700; color: #102D46; margin-bottom: 6px;">数据来源与免责声明：</div>
+          <div>• 官方资料入口：{brand.officialUrl}</div>
+          <div>• 套餐价格来源记录：{brand.sources.pricing}</div>
+          <div>• 价格与政策记录日期：{brand.sources.recordedDate}，最后校验：{brand.sources.updatedDate}</div>
+          <div style="margin-top: 6px;">
+            * 本页内容属于客观资料整理与理性选购分析，不代表本站对该服务商网络速度、解锁能力或长期在线率的商业担保。请在遵守当地法律法规的前提下理性选购。
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,303 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import options from '../../data/options.json';
+
+const pageTitle = "2026不限时流量机场推荐｜买断制一次性流量包大全｜机场智选";
+const pageDesc = "无需按月清零！收录灵猫网络、闪跃、灵动云、大佬云等品牌的不限时买断流量包，适合出差备用、低频访问与多设备备用连接。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/unlimited-airports/"
+  breadcrumbs={[{"name":"不限时机场","url":"/unlimited-airports/"}]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">专业选购专题</span>
+        <h1 style="font-size: clamp(30px, 4.2vw, 46px); font-weight: 900; color: #102D46; line-height: 1.25; margin-bottom: 16px;">
+          不限时流量机场推荐：买断制、用完为止的极佳备用方案
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          没有月底清零的焦虑，适合轻度出差、偶尔查阅学术论文或作为第二条备用网络。全库真实一次性流量包盘点。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <!-- Content Body -->
+      <div class="article-content" style="max-width: 880px; margin-bottom: 56px;">
+        
+          <h2 style="font-size: 24px; font-weight: 800; color: #102D46; margin-top: 40px; margin-bottom: 16px;">一、不限时流量包与周期套餐的本质区别</h2>
+          <p style="font-size: 16px; color: #263E50; line-height: 1.85;">普通周期套餐每个月按期重置配额，当月用不完自动清零；而不限时流量包属于一次性买断制（流量用完为止），没有固定有效期截止日。虽然其名义每GB单价通常高于月付，但对于每月仅消耗 5-10GB 的低频用户而言，综合总支出反而远远低于每个月持续续费。</p>
+        
+          <h2 style="font-size: 24px; font-weight: 800; color: #102D46; margin-top: 40px; margin-bottom: 16px;">二、真实不限时流量包价目精选</h2>
+          <p style="font-size: 16px; color: #263E50; line-height: 1.85;">灵猫网络不限时 Small（¥100，100GB）；闪跃 FlashLeap 不限时包（¥150，100GB，注意查看订单说明）；灵动云闲云小流量包（¥199，150GB）；大佬云闲云随心包（¥268，200GB）。用户可根据自身备用预算进行选择。</p>
+        
+      </div>
+
+      <!-- Filtered Real Plans Recommendation -->
+      <div style="border-top: 1px solid #DCE7EC; padding-top: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 28px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="badge-pill" style="margin-bottom: 8px;">匹配方案精选</span>
+            <h2 style="font-size: 24px; font-weight: 800; color: #102D46; margin: 0;">符合该专题的真实代表套餐</h2>
+          </div>
+          <a href="/plans/" style="font-size: 14.5px; font-weight: 700; color: #07886E; text-decoration: none;">
+            查看全部146条套餐库 →
+          </a>
+        </div>
+
+        <div class="grid-3">
+          
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">灵动云</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">灵动·闲云（小流量包）</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥199</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>150GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥99整年付清的灵动·穿云，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/lingdongyun/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.lingdongaff.com/#/?code=VeMln3TT" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">灵动云</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">灵动·惊云（标准流量包）</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥499</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>400GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥99整年付清的灵动·穿云，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/lingdongyun/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.lingdongaff.com/#/?code=VeMln3TT" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">灵动云</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">灵动·飞云（精英流量包）</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥899</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>800GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥99整年付清的灵动·穿云，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/lingdongyun/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.lingdongaff.com/#/?code=VeMln3TT" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">暮光加速</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">不限时轻量包</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥219</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>150GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥109整年付清的年付轻量版，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/twilight/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.twilightaff.com/#/?code=ftpJhH8V" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">暮光加速</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">不限时标准包</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥529</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>400GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥109整年付清的年付轻量版，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/twilight/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.twilightaff.com/#/?code=ftpJhH8V" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+              <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                    <div>
+                      <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">暮光加速</span>
+                      <h3 style="font-size: 18.5px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">不限时大容量包</h3>
+                    </div>
+                    <span class="badge-pill" style="font-size: 11px;">一次性购买</span>
+                  </div>
+
+                  <div style="background: #F8FBFE; padding: 12px; border-radius: 12px; margin-bottom: 16px; font-size: 13.5px;">
+                    <div style="display: flex; justify-content: space-between;">
+                      <span style="color: #647B8C;">整期实付：</span>
+                      <strong style="color: #102D46; font-size: 18px;">¥959</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">折合月均：</span>
+                      <strong style="color: #07886E;">买断</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 4px;">
+                      <span style="color: #647B8C;">额度配额：</span>
+                      <strong>800GB</strong>
+                    </div>
+                  </div>
+
+                  <p style="font-size: 13px; color: #647B8C; line-height: 1.6; margin-bottom: 16px;">
+                    线路：BGP智能调度 / IPLC专线 · 低预算用户：可以比较¥109整年付清的年付轻量版，但不要把其月均成本误认为可以按月支付。
+                  </p>
+                </div>
+
+                <div style="display: flex; gap: 8px;">
+                  <a href="/airports/twilight/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    查看档案
+                  </a>
+                  <a href="https://varnexa.twilightaff.com/#/?code=ftpJhH8V" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                    前往购买
+                  </a>
+                </div>
+              </div>
+            
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

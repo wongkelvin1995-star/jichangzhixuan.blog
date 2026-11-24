@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "使用条款与服务协议｜机场智选";
+const pageDesc = "机场智选用户使用条款与免责声明。请在浏览本站或参考选购建议前仔细阅读本协议条款。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/terms/"
+  breadcrumbs={[
+    { name: '使用条款', url: '/terms/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">法律声明</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          网站使用条款与免责声明
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          最后更新生效日期：2026年11月24日。访问或使用本站即代表您已完整阅读并同意受以下条款约束。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="article-container article-content">
+      
+      <h2>一、内容性质与免责声明</h2>
+      <p>
+        机场智选（https://jichangzhixuan.blog/）所发布的所有品牌资料、套餐价格、节点说明、兼容性分析及工具计算结果，均基于公开可追溯的历史材料及客观公式整理，仅供用户作为选购参考：
+      </p>
+      <ul>
+        <li>本站<strong>不是</strong>任何机场品牌的官方代理商、运营方或客服中心；</li>
+        <li>本站不直接销售任何网络连接产品、节点服务或数字虚拟商品；</li>
+        <li>由于网络服务具有技术波动性与政策多变性，本站对各第三方品牌服务器的实际在线率、晚高峰极速、流媒体持续解锁状态或售后退款结果不作任何形式的明示或暗示担保。用户最终的购买决策应以与服务商达成的合同条款为准。</li>
+      </ul>
+
+      <h2>二、合规合法使用公约</h2>
+      <p>
+        本站坚决拥护国家与地区的网络信息安全法律法规。所有访问者必须严格遵守相关法律：
+      </p>
+      <ul>
+        <li>用户通过本站指引选购的网络服务，必须严格限定于正当的学术科研、技术交流、跨境电子商务及合规影音欣赏；</li>
+        <li>严禁利用任何代理技术从事危害国家安全、传播违法违禁信息、侵犯他人隐私或破坏计算机信息系统的违法犯罪活动；</li>
+        <li>对于任何违背法律法规的使用行为，责任由行为人自行完全承担，与本站无关。</li>
+      </ul>
+
+      <h2>三、知识产权保护</h2>
+      <p>
+        本站原创的所有文本内容、排版设计、品牌标志（Logo）、结构化数据库及工具算法代码均受知识产权法律保护。未经本站明确书面许可，任何个人或机构不得以网络爬虫、镜像站群或批量洗稿的方式进行抄袭或未经授权的商业复制。
+      </p>
+
+    </div>
+  </section>
+</Layout>

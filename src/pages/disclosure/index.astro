@@ -1,0 +1,65 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "商业推广关系披露｜机场智选透明公约";
+const pageDesc = "机场智选商业合作与推广关系披露。我们坦诚公开网站与各机场品牌之间的推广返利关系，说明服务器维持经费来源，保障读者知情权。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/disclosure/"
+  breadcrumbs={[
+    { name: '推广关系披露', url: '/disclosure/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">商业透明准则</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          商业推广关系披露与透明公约
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          我们坚信透明度是赢得用户长期信任的基石。在此，机场智选向所有访问者公开披露本站的商业变现方式与推广合作关系。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="article-container article-content">
+      
+      <h2>一、推广返利链接说明（Affiliate Links）</h2>
+      <p>
+        在机场智选网站中，部分指向第三方机场官网的“立即购买”、“访问官网”或优惠链接可能包含推广标识（Affiliate / Referral 代码）。
+      </p>
+      <p>
+        当您通过这些链接完成注册并购买套餐时，服务商可能会根据其推广规则向本站支付一定比例的返利佣金。<strong>请注意：这一过程绝不会增加您需要支付的任何费用。</strong> 甚至在多数情况下，通过本站专属渠道或优惠码购买，您往往能享受到额外的折扣优惠。
+      </p>
+
+      <h2>二、资金用途说明</h2>
+      <p>
+        上述佣金收入全部用于支持机场智选的日常独立运营，包括：
+      </p>
+      <ul>
+        <li>全球多节点 CDN 加速与云端服务器高可用托管费用；</li>
+        <li>防 DDoS 攻击的高防网络防护支出；</li>
+        <li>编辑部定期核对 18 家品牌与 146 条套餐数据的人力成本；</li>
+        <li>持续开发和优化六大免费智能计算与筛选工具。</li>
+      </ul>
+
+      <h2>三、独立性公约与红线</h2>
+      <p>
+        尽管存在推广关系，但我们设立了严格的<strong>「客观评估红线」</strong>，绝不因商业利益妥协真实性：
+      </p>
+      <ul>
+        <li><strong>不接受虚假好评买断：</strong> 任何品牌无论是否提供佣金，其资料中已确认的不足、节点限制、退款困难等问题均须完整公布；</li>
+        <li><strong>不干扰智能工具运算：</strong> 智能选购、成本计算器与对比工具的输出严格遵从算法逻辑与数据库字段，绝不强行将高返利品牌置顶；</li>
+        <li><strong>如实标注无推广品牌：</strong> 对于未提供专属推广链接的品牌（例如大佬云），我们如实提供官方公开入口，绝不强行伪造推荐码或降权抹黑；</li>
+        <li><strong>规范标注链接属性：</strong> 所有商业推广出站链接均按照 W3C 与搜索引擎标准标注 <code>rel="sponsored nofollow noopener"</code>，确保网络索引的规范健康。</li>
+      </ul>
+
+    </div>
+  </section>
+</Layout>

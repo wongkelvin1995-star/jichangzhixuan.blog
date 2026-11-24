@@ -1,0 +1,370 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import brands from '../../data/brands.json';
+import plans from '../../data/plans.json';
+import options from '../../data/options.json';
+
+const pageTitle = "Smart Match 智能选机场｜多维度套餐匹配系统与理性推荐";
+const pageDesc = "基于真实套餐数据库与多维度匹配算法。根据您的每月预算、流量额度、设备系统、Clash客户端需求及使用场景，精准匹配适合的机场套餐，杜绝盲目消费。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/smart-match/"
+  breadcrumbs={[
+    { name: '智能选机场', url: '/smart-match/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">旗舰智能决策引擎</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          Smart Match 智能机场套餐匹配系统
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          输入您的实际使用需求，系统将从全站 18 家品牌、146 条套餐及 261 项购买选项中进行算法筛选。严格区分「完全符合已知条件」、「有条件符合」与「需客服二次确认」，杜绝以推广为目的的人为篡改。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div style="display: grid; grid-template-columns: 1fr; gap: 40px;">
+        
+        <!-- Filter Form Control Card -->
+        <div class="smart-card" style="padding: 32px; background: #F8FBFE; border: 1.5px solid #DCE7EC;">
+          <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 24px; display: flex; align-items: center; gap: 8px;">
+            <span style="color: #10B89A;">⚙️</span> 设置您的筛选匹配条件
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;">
+            
+            <!-- Monthly Budget -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                1. 每月最高预算 (折合月均)
+              </label>
+              <select id="filter-monthly-budget" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="all">不限预算</option>
+                <option value="20">¥20/月及以下 (平民入门)</option>
+                <option value="30">¥30/月及以下 (主流均衡)</option>
+                <option value="60">¥60/月及以下 (中高端进阶)</option>
+                <option value="100">¥100/月及以下 (高规格大带宽)</option>
+              </select>
+            </div>
+
+            <!-- Max Upfront Cash Budget -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                2. 最大一次性预付金额
+              </label>
+              <select id="filter-max-upfront" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="all">不限金额</option>
+                <option value="50">¥50 以内 (仅考虑短期或极低起步)</option>
+                <option value="120">¥120 以内 (可接受百元内年付/轻量包)</option>
+                <option value="300">¥300 以内 (主流年付区间)</option>
+                <option value="600">¥600 以内 (大流量长周期)</option>
+              </select>
+            </div>
+
+            <!-- Monthly Traffic Needs -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                3. 每月预计流量额度
+              </label>
+              <select id="filter-traffic" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="all">不限流量</option>
+                <option value="50">至少 50GB / 月 (日常网页)</option>
+                <option value="100">至少 100GB / 月 (综合办公/AI)</option>
+                <option value="200">至少 200GB / 月 (影音/频繁视频)</option>
+                <option value="500">至少 500GB / 月 (大文件/重度吞吐)</option>
+              </select>
+            </div>
+
+            <!-- Billing Cycle -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                4. 首选付款周期
+              </label>
+              <select id="filter-period" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="all">不限周期 (月付/年付/买断)</option>
+                <option value="monthly">仅看月付 (按月计费，随用随停)</option>
+                <option value="yearly">仅看年付 (长周期优惠折算)</option>
+                <option value="onetime">仅看不限时流量包 (买断制/不按月重置)</option>
+              </select>
+            </div>
+
+            <!-- Third-Party Client Requirement -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                5. 第三方客户端要求 (Clash / Shadowrocket)
+              </label>
+              <select id="filter-clash" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="any">接受官方定制客户端 (推荐)</option>
+                <option value="must_clash">必须无门槛支持第三方 Clash 订阅</option>
+              </select>
+            </div>
+
+            <!-- Sorting rule -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 8px;">
+                6. 结果排序方式
+              </label>
+              <select id="filter-sort" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="match">综合匹配度优先</option>
+                <option value="price_asc">实付价格从低到高</option>
+                <option value="monthly_asc">折合月均成本从低到高</option>
+                <option value="unit_cost">每GB单位成本从低到高</option>
+                <option value="traffic_desc">流量配额从大到小</option>
+              </select>
+            </div>
+
+          </div>
+
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end; gap: 12px;">
+            <button id="reset-filters" type="button" class="btn-secondary" style="padding: 10px 20px; font-size: 14.5px;">
+              重置全部条件
+            </button>
+            <button id="apply-filters" type="button" class="btn-primary" style="padding: 10px 24px; font-size: 14.5px;">
+              开始实时匹配
+            </button>
+          </div>
+        </div>
+
+        <!-- Matching Results Counter & Grid -->
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+            <h2 style="font-size: 22px; font-weight: 800; color: #102D46; margin: 0;">
+              符合筛选条件的套餐结果
+            </h2>
+            <div id="results-count" style="font-size: 15px; font-weight: 700; color: #07886E;">
+              正在加载数据库...
+            </div>
+          </div>
+
+          <!-- Dynamic Results Container -->
+          <div id="results-grid" class="grid-3" style="align-items: stretch;">
+            <!-- Rendered by client script or initial fallback -->
+          </div>
+
+          <!-- Empty State (Hidden by default) -->
+          <div id="empty-state" style="display: none; padding: 56px 24px; text-align: center; background: #F8FBFE; border: 1.5px dashed #DCE7EC; border-radius: 20px;">
+            <div style="font-size: 40px; margin-bottom: 16px;">🔍</div>
+            <h3 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 8px;">未找到完全符合所有限制的套餐</h3>
+            <p style="font-size: 14.5px; color: #647B8C; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; margin-bottom: 20px;">
+              您设置的条件可能过于苛刻（例如要求极低实付同时拥有超大流量或无门槛第三方订阅）。建议放宽预算上限或将首选周期调整为“不限周期”。
+            </p>
+            <button id="relax-filters" class="btn-primary" style="font-size: 14.5px; padding: 10px 22px;">
+              放宽条件重新查找
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Pass structured database to client JS -->
+  <script define:vars={{ brandsData: brands, optionsData: options }}>
+    const allBrands = brandsData;
+    const allOptions = optionsData;
+
+    // Elements
+    const budgetSelect = document.getElementById('filter-monthly-budget');
+    const upfrontSelect = document.getElementById('filter-max-upfront');
+    const trafficSelect = document.getElementById('filter-traffic');
+    const periodSelect = document.getElementById('filter-period');
+    const clashSelect = document.getElementById('filter-clash');
+    const sortSelect = document.getElementById('filter-sort');
+    const applyBtn = document.getElementById('apply-filters');
+    const resetBtn = document.getElementById('reset-filters');
+    const relaxBtn = document.getElementById('relax-filters');
+    const resultsGrid = document.getElementById('results-grid');
+    const resultsCount = document.getElementById('results-count');
+    const emptyState = document.getElementById('empty-state');
+
+    // Parse URL params if coming from homepage quick filter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('budget')) {
+      const b = urlParams.get('budget');
+      if (b === 'under20') budgetSelect.value = '20';
+      else if (b === 'under30') budgetSelect.value = '30';
+      else if (b === '30to60') budgetSelect.value = '60';
+    }
+    if (urlParams.has('traffic')) {
+      const t = urlParams.get('traffic');
+      if (['50', '100', '200', '500'].includes(t)) trafficSelect.value = t;
+    }
+    if (urlParams.has('period')) {
+      const p = urlParams.get('period');
+      if (['monthly', 'yearly', 'onetime'].includes(p)) periodSelect.value = p;
+    }
+    if (urlParams.has('scenario') && urlParams.get('scenario') === 'clash') {
+      clashSelect.value = 'must_clash';
+    }
+
+    function runMatch() {
+      const maxMonthly = budgetSelect.value === 'all' ? Infinity : parseFloat(budgetSelect.value);
+      const maxUpfront = upfrontSelect.value === 'all' ? Infinity : parseFloat(upfrontSelect.value);
+      const minTraffic = trafficSelect.value === 'all' ? 0 : parseFloat(trafficSelect.value);
+      const period = periodSelect.value;
+      const clashReq = clashSelect.value;
+      const sortBy = sortSelect.value;
+
+      let matched = allOptions.filter(opt => {
+        // 1. Max upfront cash filter
+        if (opt.totalPrice > maxUpfront) return false;
+
+        // 2. Monthly cost filter (for periodic plans)
+        if (opt.monthlyCost && opt.monthlyCost > maxMonthly) return false;
+
+        // 3. Traffic filter
+        if (opt.planType === 'periodic') {
+          if (opt.monthlyTrafficGB && opt.monthlyTrafficGB < minTraffic) return false;
+        } else if (opt.planType === 'onetime') {
+          if (opt.totalTrafficGB && opt.totalTrafficGB < minTraffic) return false;
+        }
+
+        // 4. Billing Period filter
+        if (period === 'monthly') {
+          if (opt.periodName !== '月付' && opt.periodMonths !== 1) return false;
+        } else if (period === 'yearly') {
+          if (opt.periodName !== '年付' && opt.periodMonths !== 12) return false;
+        } else if (period === 'onetime') {
+          if (opt.planType !== 'onetime') return false;
+        }
+
+        // 5. Clash requirement check
+        const brandObj = allBrands.find(b => b.slug === opt.brandId);
+        if (clashReq === 'must_clash' && brandObj) {
+          const subP = brandObj.subPolicy || {};
+          // If brand explicitly does not provide third-party, or has high threshold caveat
+          if (subP.mustOfficialClient === '是' && !subP.provided.includes('开放')) {
+            // If user demands clash, filter out brands that forbid or suspend it
+            if (brandObj.limitations.some(l => l.includes('暂停第三方') || l.includes('不开放第三方'))) {
+              return false;
+            }
+          }
+        }
+
+        return true;
+      });
+
+      // Sort
+      matched.sort((a, b) => {
+        if (sortBy === 'price_asc') return a.totalPrice - b.totalPrice;
+        if (sortBy === 'monthly_asc') {
+          const ma = a.monthlyCost || a.totalPrice;
+          const mb = b.monthlyCost || b.totalPrice;
+          return ma - mb;
+        }
+        if (sortBy === 'unit_cost') {
+          const ua = a.unitCostPerGB || 999;
+          const ub = b.unitCostPerGB || 999;
+          return ua - ub;
+        }
+        if (sortBy === 'traffic_desc') {
+          const ta = a.monthlyTrafficGB || a.totalTrafficGB || 0;
+          const tb = b.monthlyTrafficGB || b.totalTrafficGB || 0;
+          return tb - ta;
+        }
+        // default match: balance between unit cost and price
+        return (a.monthlyCost || a.totalPrice) - (b.monthlyCost || b.totalPrice);
+      });
+
+      renderResults(matched);
+    }
+
+    function renderResults(list) {
+      resultsCount.textContent = `共匹配到 ${list.length} 个符合条件的真实套餐选项`;
+
+      if (list.length === 0) {
+        resultsGrid.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      resultsGrid.innerHTML = list.map(opt => {
+        const brandObj = allBrands.find(b => b.slug === opt.brandId) || {};
+        const isOnetime = opt.planType === 'onetime';
+        const hasCaveat = opt.brandId === 'lingdongyun' && opt.totalPrice < 200;
+
+        return `
+          <div class="smart-card" style="padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span style="font-size: 12.5px; font-weight: 700; color: #10B89A;">${brandObj.name || opt.brandName}</span>
+                  <h3 style="font-size: 19px; font-weight: 800; color: #102D46; margin: 2px 0 0 0;">${opt.planName}</h3>
+                </div>
+                <span class="badge-pill" style="font-size: 11.5px; padding: 2px 8px;">${opt.periodName}</span>
+              </div>
+
+              <!-- Price Box -->
+              <div style="background: #F8FBFE; border: 1px solid #EEF3F7; border-radius: 12px; padding: 12px; margin-bottom: 16px;">
+                <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                  <div>
+                    <span style="font-size: 12px; color: #647B8C;">整期实付：</span>
+                    <span style="font-size: 22px; font-weight: 900; color: #102D46;">¥${opt.totalPrice}</span>
+                  </div>
+                  <div>
+                    <span style="font-size: 12px; color: #647B8C;">折合月均：</span>
+                    <span style="font-size: 16px; font-weight: 800; color: #07886E;">${opt.monthlyCost ? `¥${opt.monthlyCost}/月` : '买断'}</span>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 12.5px; color: #647B8C; margin-top: 6px; border-top: 1px dashed #DCE7EC; padding-top: 6px;">
+                  <span>流量：<strong>${opt.trafficText}</strong></span>
+                  <span>单价：<strong>${opt.unitCostPerGB ? `¥${opt.unitCostPerGB}/GB` : '—'}</strong></span>
+                </div>
+              </div>
+
+              <!-- Caveats -->
+              <div style="font-size: 13px; color: #647B8C; line-height: 1.5; margin-bottom: 16px;">
+                ${hasCaveat ? `
+                  <div style="padding: 6px 10px; background: #FFF3E8; border-radius: 6px; color: #B25E00; margin-bottom: 8px;">
+                    ⚠ 提示：该品牌资料记录第三方通用订阅约需订单满 ¥200 门槛申请，官方客户端为主要接入途径。
+                  </div>
+                ` : ''}
+                <div>• 网络线路：${(brandObj.networkTypes || []).slice(0, 2).join(' / ')}</div>
+                <div>• 适合人群：${(brandObj.suitableUsers || []).slice(0, 1)[0] || '日常通用'}</div>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 8px; border-top: 1px solid #EEF3F7; padding-top: 14px;">
+              <a href="/airports/${opt.brandId}/" class="btn-secondary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                查看档案
+              </a>
+              <a href="${opt.purchaseUrl || brandObj.purchaseUrl}" target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 8px 10px; font-size: 13px; text-align: center;">
+                进入官网
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    applyBtn.addEventListener('click', runMatch);
+    resetBtn.addEventListener('click', () => {
+      budgetSelect.value = 'all';
+      upfrontSelect.value = 'all';
+      trafficSelect.value = 'all';
+      periodSelect.value = 'all';
+      clashSelect.value = 'any';
+      sortSelect.value = 'match';
+      runMatch();
+    });
+    relaxBtn.addEventListener('click', () => {
+      budgetSelect.value = 'all';
+      upfrontSelect.value = 'all';
+      clashSelect.value = 'any';
+      runMatch();
+    });
+
+    // Auto-run on load
+    runMatch();
+  </script>
+</Layout>

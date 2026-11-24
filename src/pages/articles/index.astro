@@ -1,0 +1,113 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import articles from '../../data/articles.json';
+import roadmap from '../../data/articles-roadmap.json';
+
+const pageTitle = "机场选购指南与深度专题文章大全｜机场智选";
+const pageDesc = "机场智选深度原创专栏。涵盖核心机场推荐、预算与成本分析、流量额度测算、设备客户端兼容、购买避坑指南及品牌横向对比。";
+
+const categories = ['全部', '核心推荐', '预算价格', '流量周期', '设备场景', '避坑知识', '品牌PK'];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/articles/"
+  breadcrumbs={[
+    { name: '专题文章', url: '/articles/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">深度科技媒体</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场智选专题文章与深度选购指南
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          由机场智选编辑部撰写的深度原创内容。我们拒绝洗稿与虚假测速跑分，坚持从真实套餐数据、底层技术架构与理性消费逻辑出发，帮您看清选购本质。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      
+      <!-- Published Articles Grid -->
+      <div style="margin-bottom: 64px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <span class="badge-pill" style="margin-bottom: 8px;">已发布核心内容</span>
+            <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin: 0;">精选核心选购指南 (首批已发布)</h2>
+          </div>
+          <div style="font-size: 14.5px; color: #647B8C;">
+            当前已上线 {articles.length} 篇高质量深度文章
+          </div>
+        </div>
+
+        <div class="grid-3">
+          {articles.map(art => (
+            <div class="smart-card" style="padding: 28px; display: flex; flex-direction: column; justify-content: space-between;">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                  <span class="badge-pill" style="font-size: 11.5px;">{art.category}</span>
+                  <span style="font-size: 12.5px; color: #8BA0B2;">{art.readTime}</span>
+                </div>
+                <h3 style="font-size: 19px; font-weight: 800; color: #102D46; margin: 0 0 12px 0; line-height: 1.45;">
+                  <a href={`/articles/${art.slug}/`} style="color: inherit; text-decoration: none;">{art.title}</a>
+                </h3>
+                <p style="font-size: 14px; color: #647B8C; line-height: 1.7; margin-bottom: 20px;">
+                  {art.summary}
+                </p>
+              </div>
+
+              <div style="border-top: 1px solid #EEF3F7; padding-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 13px; color: #647B8C;">
+                <span>{art.author}</span>
+                <a href={`/articles/${art.slug}/`} style="color: #07886E; font-weight: 700; text-decoration: none;">
+                  阅读全文 →
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Complete 60 Topics Roadmap / Content Plan (Section 19 requirements) -->
+      <div style="background: #F8FBFE; border: 1.5px solid #DCE7EC; border-radius: 24px; padding: 40px;">
+        <div style="margin-bottom: 28px;">
+          <span class="badge-pill" style="margin-bottom: 10px;">透明内容储备</span>
+          <h2 style="font-size: 24px; font-weight: 800; color: #102D46; margin-bottom: 8px;">
+            60 篇原创 SEO 选题储备与发布规划
+          </h2>
+          <p style="font-size: 14.5px; color: #647B8C; line-height: 1.7; max-width: 800px;">
+            机场智选规划了完整的六大选题集群。我们坚持“质量优先、杜绝空文章”，首阶段已上线 25 篇核心深度文章，其余选题作为后续内容库按期执行质量校验后陆续刊出。
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+          {roadmap.map(item => (
+            <div style="background: #FFFFFF; border: 1px solid #DCE7EC; border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+              <div style="overflow: hidden;">
+                <span style="font-size: 11.5px; font-weight: 700; color: #10B89A; margin-right: 6px;">[{item.category}]</span>
+                {item.status === 'published' ? (
+                  <a href={`/articles/${item.slug}/`} style="font-size: 13.5px; font-weight: 600; color: #102D46; text-decoration: none;">
+                    {item.title}
+                  </a>
+                ) : (
+                  <span style="font-size: 13.5px; color: #647B8C;">
+                    {item.title}
+                  </span>
+                )}
+              </div>
+              <span style={`flex-shrink: 0; font-size: 11px; padding: 2px 8px; border-radius: 6px; font-weight: 600; background: ${item.status === 'published' ? '#E4F0F6' : '#F4F9FC'}; color: ${item.status === 'published' ? '#07886E' : '#8BA0B2'};`}>
+                {item.status === 'published' ? '已上线' : '筹备中'}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

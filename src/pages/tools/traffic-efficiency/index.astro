@@ -1,0 +1,184 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import brands from '../../../data/brands.json';
+import options from '../../../data/options.json';
+
+const pageTitle = "机场流量利用率分析工具｜测算闲置浪费与合理降档方案";
+const pageDesc = "输入当前套餐费用与实际消耗流量，系统自动评估流量利用率、闲置资金浪费金额，并提供合理的降档或转为不限时流量包的省钱建议。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/tools/traffic-efficiency/"
+  breadcrumbs={[
+    { name: '智选工具', url: '/tools/' },
+    { name: '流量利用率分析', url: '/tools/traffic-efficiency/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">防浪费分析</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场流量利用率与防浪费诊断
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          你买的流量真的用完了吗？当月清零的机制让许多用户每月为大半闲置的配额买单。立即输入数据，诊断你的套餐利用率健康度。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; align-items: start;">
+        
+        <!-- Inputs -->
+        <div class="smart-card" style="padding: 32px; background: #F8FBFE; border: 1.5px solid #DCE7EC;">
+          <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 24px;">
+            📊 输入在用套餐数据
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                当前套餐每月支出 (元/月)
+              </label>
+              <input id="eff-price" type="number" min="1" step="0.5" value="35" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                每月套餐总额度 (GB)
+              </label>
+              <input id="eff-quota" type="number" min="1" step="5" value="200" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                每月实际消耗流量 (GB)
+              </label>
+              <input id="eff-actual" type="number" min="1" step="5" value="45" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Diagnostic Output -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <div class="smart-card" style="padding: 32px; background: #102D46; color: #FFFFFF;">
+            <span style="font-size: 12px; font-weight: 700; color: #10B89A; letter-spacing: 0.08em; text-transform: uppercase;">
+              EFFICIENCY REPORT
+            </span>
+            <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-top: 4px; margin-bottom: 24px;">
+              利用率诊断分析
+            </h3>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+              
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">实际流量利用率</div>
+                <div id="eff-percent" style="font-size: 32px; font-weight: 900; color: #10B89A; margin-top: 4px;">
+                  0%
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">每月闲置清零流量</div>
+                <div id="eff-wasted-gb" style="font-size: 28px; font-weight: 900; color: #FFFFFF; margin-top: 4px;">
+                  0 GB
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">月度闲置损失金额</div>
+                <div id="eff-wasted-money" style="font-size: 24px; font-weight: 800; color: #E53E3E; margin-top: 4px;">
+                  ¥0.00
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">真实每GB单价</div>
+                <div id="eff-real-unit" style="font-size: 24px; font-weight: 800; color: #FFFFFF; margin-top: 4px;">
+                  ¥0.00 / GB
+                </div>
+              </div>
+
+            </div>
+
+            <div id="diagnostic-summary" style="background: rgba(255, 255, 255, 0.08); padding: 16px; border-radius: 12px; font-size: 14px; color: #DCE7EC; line-height: 1.6;">
+              计算详情更新中...
+            </div>
+
+          </div>
+
+          <!-- Optimization Advice -->
+          <div class="smart-card" style="padding: 24px; background: #FFFFFF;">
+            <h4 style="font-size: 16px; font-weight: 800; color: #102D46; margin-bottom: 12px;">
+              💡 机场智选建议：
+            </h4>
+            <div id="advice-content" style="font-size: 14px; color: #263E50; line-height: 1.7;">
+              若您的利用率长期低于 40%，强烈建议降档至更低价格的套餐（如 ¥15-¥20/月档位），或考虑购买买断制不限时流量包（如灵猫网络或闪跃），每年可直接为你省下数百元不必要的浪费。
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const pInput = document.getElementById('eff-price');
+    const qInput = document.getElementById('eff-quota');
+    const aInput = document.getElementById('eff-actual');
+
+    const pDisplay = document.getElementById('eff-percent');
+    const gbDisplay = document.getElementById('eff-wasted-gb');
+    const mDisplay = document.getElementById('eff-wasted-money');
+    const uDisplay = document.getElementById('eff-real-unit');
+    const diagSummary = document.getElementById('diagnostic-summary');
+    const adviceContent = document.getElementById('advice-content');
+
+    function calculate() {
+      const price = parseFloat(pInput.value) || 0;
+      const quota = parseFloat(qInput.value) || 1;
+      const actual = parseFloat(aInput.value) || 0;
+
+      const pct = Math.round((actual / quota) * 100);
+      const wastedGB = Math.max(0, quota - actual);
+      const nominalUnit = price / quota;
+      const wastedMoney = Number((wastedGB * nominalUnit).toFixed(2));
+      const realUnit = actual > 0 ? Number((price / actual).toFixed(4)) : price;
+
+      pDisplay.textContent = `${pct}%`;
+      gbDisplay.textContent = `${wastedGB} GB`;
+      mDisplay.textContent = `¥${wastedMoney}`;
+      uDisplay.textContent = `¥${realUnit} / GB`;
+
+      if (pct < 35) {
+        pDisplay.style.color = '#E53E3E';
+        diagSummary.innerHTML = `<strong>严重浪费诊断：</strong> 您购买了 ${quota}GB 但仅使用了 ${actual}GB，每月高达 ${wastedGB}GB 流量被直接清零！名义单价看似很低，但您真实使用的每GB成本高达 ¥${realUnit}。`;
+        adviceContent.innerHTML = `<strong>降档行动建议：</strong><br/>建议在下个计费周期直接降档到 50GB-80GB 的入门套餐（例如灵动云拂风 ¥20/月，或暮光加速 ¥20/月），或者转为一次性买断流量包。这将直接减少每年约 ¥${Math.round(wastedMoney * 12)} 的无谓损失！`;
+      } else if (pct < 65) {
+        pDisplay.style.color = '#D69E2E';
+        diagSummary.innerHTML = `<strong>适度冗余诊断：</strong> 您当前的利用率为 ${pct}%，处于合理的安全缓冲与轻度冗余区间。闲置流量约 ${wastedGB}GB。`;
+        adviceContent.innerHTML = `如果您偶尔会有突发大流量需求，当前配置尚属合理；如果每月用量持续稳定在 ${actual}GB 左右，亦可关注 100GB 档位以进一步降低月度现金流支出。`;
+      } else if (pct <= 95) {
+        pDisplay.style.color = '#10B89A';
+        diagSummary.innerHTML = `<strong>健康高效诊断：</strong> 恭喜！您的流量利用率高达 ${pct}%，既充分享受了套餐额度，又保留了适度的安全缓冲，几乎没有资金浪费。`;
+        adviceContent.innerHTML = `保持当前套餐即可，无需做任何调整。`;
+      } else {
+        pDisplay.style.color = '#E53E3E';
+        diagSummary.innerHTML = `<strong>高负荷告警：</strong> 您的流量利用率已接近 100% (${pct}%)，随时面临月底因流量耗尽而断网的风险！`;
+        adviceContent.innerHTML = `建议升级至上一阶流量档位，或者搭配一个小额度的不限时买断流量包作为紧急备用。`;
+      }
+    }
+
+    [pInput, qInput, aInput].forEach(el => el.addEventListener('input', calculate));
+    calculate();
+  </script>
+</Layout>

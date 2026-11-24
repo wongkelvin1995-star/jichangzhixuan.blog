@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const pageTitle = "联系与资料纠错｜机场智选编辑部";
+const pageDesc = "发现套餐价格有变动或品牌政策有调整？欢迎联系机场智选编辑部提交勘误与反馈，我们将在核实后24小时内更新。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/contact/"
+  breadcrumbs={[
+    { name: '联系与纠错', url: '/contact/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">实时勘误通道</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          联系我们与资料纠错
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          套餐价格调整？新套餐上线？客户端订阅政策变更？我们深知信息时效性对选购决策至关重要。如您发现任何数据存在遗漏或偏差，请随时与我们取得联系。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: start;">
+        
+        <!-- Contact Form / Guidelines -->
+        <div class="smart-card" style="padding: 36px; background: #F8FBFE; border: 1.5px solid #DCE7EC;">
+          <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 18px;">
+            📝 提交数据纠错或品牌收录申请
+          </h2>
+          <p style="font-size: 14.5px; color: #647B8C; line-height: 1.7; margin-bottom: 24px;">
+            为了提高核实效率，提交信息时请尽量附带：品牌名称、相关套餐名称、变动前后的具体数据以及官方公告或后台截图链接。
+          </p>
+
+          <form onsubmit="alert('感谢您的反馈！编辑部核实后将尽快在对应页面与数据库中完成更新。'); return false;" style="display: flex; flex-direction: column; gap: 16px;">
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">您的称呼或昵称</label>
+              <input type="text" required placeholder="例如：李先生 / 机场用户" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">涉及的机场品牌</label>
+              <input type="text" required placeholder="例如：灵动云 / 暮光加速 / 微风网络等" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;" />
+            </div>
+
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">勘误或变动内容说明</label>
+              <textarea rows="5" required placeholder="请详细描述具体的调整内容（如价格、周期、流量配额或订阅政策等）..." style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;"></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="padding: 12px 0; font-size: 15px; margin-top: 8px;">
+              提交纠错信息
+            </button>
+          </form>
+        </div>
+
+        <!-- Editorial Contact Info -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          <div class="smart-card" style="padding: 32px; background: #102D46; color: #FFFFFF;">
+            <h3 style="font-size: 20px; font-weight: 800; color: #FFFFFF; margin-bottom: 16px;">
+              📬 官方沟通渠道
+            </h3>
+            <p style="font-size: 14.5px; color: #A4B8C7; line-height: 1.7; margin-bottom: 20px;">
+              机场智选编辑部坚持真实联系渠道，不编造虚假办公地址或未开通的热线电话。您可以通过以下途径与我们取得联系：
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 14px; font-size: 14.5px;">
+              <div style="display: flex; gap: 10px;">
+                <span style="color: #10B89A; font-weight: 700;">电子邮箱：</span>
+                <span style="color: #FFFFFF;">contact@jichangzhixuan.blog</span>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <span style="color: #10B89A; font-weight: 700;">响应时效：</span>
+                <span style="color: #FFFFFF;">工作日 24 小时内核实并回复</span>
+              </div>
+              <div style="display: flex; gap: 10px;">
+                <span style="color: #10B89A; font-weight: 700;">更新频率：</span>
+                <span style="color: #FFFFFF;">核心数据库每周至少校验 1 次</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="smart-card" style="padding: 24px; background: #FFFFFF;">
+            <h4 style="font-size: 16px; font-weight: 800; color: #102D46; margin-bottom: 10px;">
+              品牌方入驻说明
+            </h4>
+            <p style="font-size: 14px; color: #647B8C; line-height: 1.65;">
+              如您的机场品牌希望被收录至本站资料库，请提供完整可核查的官网、全部在售套餐价目、网络拓扑说明及客服联系方式。我们不对任何品牌收取入驻保护费，所有展示均依据客观规范执行。
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</Layout>

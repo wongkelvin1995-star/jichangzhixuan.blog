@@ -1,0 +1,621 @@
+[
+  {
+    "rank": 1,
+    "displayOrder": 1,
+    "id": "lingdongyun",
+    "name": "灵动云",
+    "englishName": "LingDongYun",
+    "slug": "lingdongyun",
+    "badge": "编辑推荐 TOP 01",
+    "isTop3": true,
+    "tagline": "IEPL/IPLC 专线与 BGP 智能调度，多档周期与私人定制服务",
+    "minMonthlyPrice": 20,
+    "minMonthlyTraffic": "100GB／月",
+    "minYearlyPrice": 99,
+    "minYearlyTraffic": "70GB／30天重置",
+    "purchaseUrl": "https://varnexa.lingdongaff.com/#/?code=VeMln3TT",
+    "networkTypes": [
+      "BGP智能调度",
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 9,
+    "optionsCount": 29,
+    "advantages": [
+      "有明确月付入口：灵动·拂风 ¥20/月，额度100GB／月，可以先控制首单投入。",
+      "有年付选择：灵动·穿云一次支付¥99，其月度流量为70GB／30天重置，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅有额外门槛或需要客服领取，不能当成所有套餐标配。"
+    ]
+  },
+  {
+    "rank": 2,
+    "displayOrder": 2,
+    "id": "twilight",
+    "name": "暮光加速",
+    "englishName": "Twilight",
+    "slug": "twilight",
+    "badge": "编辑推荐 TOP 02",
+    "isTop3": true,
+    "tagline": "月付入门与轻量年付 IPLC 专线，覆盖 15+ 地区出口",
+    "minMonthlyPrice": 20,
+    "minMonthlyTraffic": "120GB/月",
+    "minYearlyPrice": 109,
+    "minYearlyTraffic": "70GB/月",
+    "purchaseUrl": "https://varnexa.twilightaff.com/#/?code=ftpJhH8V",
+    "networkTypes": [
+      "BGP智能调度",
+      "IPLC专线"
+    ],
+    "protocols": [
+      "Shadowsocks"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：基础版 ¥20/月，额度120GB/月，可以先控制首单投入。",
+      "有年付选择：年付轻量版一次支付¥109，其月度流量为70GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 3,
+    "displayOrder": 3,
+    "id": "breezenet",
+    "name": "微风网络",
+    "englishName": "BreezeNet",
+    "slug": "breezenet",
+    "badge": "编辑推荐 TOP 03",
+    "isTop3": true,
+    "tagline": "平价月付与全节点 1.0 倍率，主流影音流媒体与 AI 优化",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "200GB/月",
+    "minYearlyPrice": 137,
+    "minYearlyTraffic": "100GB/月",
+    "purchaseUrl": "https://downloadshare.breezenetttt.sbs/#/?code=WL5PyLbC",
+    "networkTypes": [
+      "IPLC专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 6,
+    "optionsCount": 6,
+    "advantages": [
+      "有明确月付入口：乘风 Riding ¥25/月，额度200GB/月，可以先控制首单投入。",
+      "有年付选择：清风 Breeze一次支付¥137，其月度流量为100GB/月，便于按全年用量比较。",
+      "提供 2 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 4,
+    "displayOrder": 4,
+    "id": "feimaoyun",
+    "name": "飞猫云",
+    "englishName": "FlyCat",
+    "slug": "feimaoyun",
+    "badge": "高性价比精选",
+    "isTop3": false,
+    "tagline": "高性价比月付流量与学生优惠年付，覆盖亚太及欧美出口",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 84,
+    "minYearlyTraffic": "50GB/月",
+    "purchaseUrl": "https://flycat1.flycatvipaff.cc/#/?code=F9DUFUIW",
+    "networkTypes": [
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS",
+      "Trojan"
+    ],
+    "plansCount": 7,
+    "optionsCount": 11,
+    "advantages": [
+      "有明确月付入口：飞猫·星耀版 ¥25/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：飞猫·学生版一次支付¥84，其月度流量为50GB/月，便于按全年用量比较。",
+      "提供 1 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅已被公告暂停，Clash/Shadowrocket及路由器类需求受到直接影响。"
+    ]
+  },
+  {
+    "rank": 5,
+    "displayOrder": 5,
+    "id": "dalaoyun",
+    "name": "大佬云",
+    "englishName": "DalaoCloud",
+    "slug": "dalaoyun",
+    "badge": "低价专线精选",
+    "isTop3": false,
+    "tagline": "低价 IEPL 专线，全节点 1.0 倍率与不限设备连接",
+    "minMonthlyPrice": 15,
+    "minMonthlyTraffic": "50GB/月",
+    "minYearlyPrice": 96,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://vip.dalaocloud.com/",
+    "networkTypes": [
+      "优质公网/混合线路"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 8,
+    "optionsCount": 23,
+    "advantages": [
+      "有明确月付入口：福云·限时版 ¥15/月，额度50GB/月，可以先控制首单投入。",
+      "有年付选择：年付活动包一次支付¥96，其月度流量为60GB/月，便于按全年用量比较。",
+      "提供 2 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 6,
+    "displayOrder": 6,
+    "id": "flyv",
+    "name": "飞V",
+    "englishName": "FlyV",
+    "slug": "flyv",
+    "badge": "并列第 06 位",
+    "isTop3": false,
+    "tagline": "并列第六推荐，弹性周期覆盖与基础提速双线布局",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 99,
+    "minYearlyTraffic": "65GB/月",
+    "purchaseUrl": "https://varnexa.flyvaff.com/#/?code=WMNYHyYb",
+    "networkTypes": [
+      "IEPL专线"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 9,
+    "optionsCount": 29,
+    "advantages": [
+      "有明确月付入口：入门方案 ¥25/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：年付标准轻量版一次支付¥99，其月度流量为65GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 6,
+    "displayOrder": 7,
+    "id": "wavenet",
+    "name": "浪网",
+    "englishName": "WaveNet",
+    "slug": "wavenet",
+    "badge": "并列第 06 位",
+    "isTop3": false,
+    "tagline": "并列第六推荐，平价月付与买断制一次性流量包设计",
+    "minMonthlyPrice": 30,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 119,
+    "minYearlyTraffic": "80GB/月",
+    "purchaseUrl": "https://varnexa.wavenetaff.com/#/?code=J4YRbSDO",
+    "networkTypes": [
+      "BGP智能调度",
+      "IPLC专线"
+    ],
+    "protocols": [
+      "Shadowsocks"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：入门 ¥30/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：年付标准一次支付¥119，其月度流量为80GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 7,
+    "displayOrder": 8,
+    "id": "invisible",
+    "name": "隐形人",
+    "englishName": "Invisible",
+    "slug": "invisible",
+    "badge": "冗余容灾精选",
+    "isTop3": false,
+    "tagline": "多节点冗余备份与隐私保护机制，流媒体与 AI 解锁兼备",
+    "minMonthlyPrice": 24,
+    "minMonthlyTraffic": "144GB/月",
+    "minYearlyPrice": 109,
+    "minYearlyTraffic": "80GB/月；每30天重置",
+    "purchaseUrl": "https://varnexa.invisibleaff.com/#/?code=n6RN1lfe",
+    "networkTypes": [
+      "IEPL专线"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：白银纪元 ¥24/月，额度144GB/月，可以先控制首单投入。",
+      "有年付选择：星耀风暴一次支付¥109，其月度流量为80GB/月；每30天重置，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 8,
+    "displayOrder": 9,
+    "id": "tiziyun",
+    "name": "梯子云",
+    "englishName": "LadderCloud",
+    "slug": "tiziyun",
+    "badge": "长周期优选",
+    "isTop3": false,
+    "tagline": "长周期优惠年付与多档不限时流量包，多设备均衡配置",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "125GB/月",
+    "minYearlyPrice": 89,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://varnexa.ladderaff.com/#/?code=YU2JGrKq",
+    "networkTypes": [
+      "BGP智能调度",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 9,
+    "optionsCount": 29,
+    "advantages": [
+      "有明确月付入口：初阶网络·基础视界 ¥25/月，额度125GB/月，可以先控制首单投入。",
+      "有年付选择：天梯随行·年度保活一次支付¥89，其月度流量为60GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 9,
+    "displayOrder": 10,
+    "id": "wuyou",
+    "name": "无忧连接",
+    "englishName": "WorryFree",
+    "slug": "wuyou",
+    "badge": "平民低价优选",
+    "isTop3": false,
+    "tagline": "低价平民化年付与弹性月付，新手低门槛入门体验",
+    "minMonthlyPrice": 19,
+    "minMonthlyTraffic": "100GB/月",
+    "minYearlyPrice": 79,
+    "minYearlyTraffic": "40GB/月",
+    "purchaseUrl": "https://wep01.worryfreeaff.com/#/?code=w8pUrMaM",
+    "networkTypes": [
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS",
+      "VMess",
+      "Trojan"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：舒心链接 ¥19/月，额度100GB/月，可以先控制首单投入。",
+      "有年付选择：MINI 链接一次支付¥79，其月度流量为40GB/月，便于按全年用量比较。",
+      "提供 2 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 10,
+    "displayOrder": 11,
+    "id": "firefly",
+    "name": "Firefly",
+    "englishName": "Firefly",
+    "slug": "firefly",
+    "badge": "轻量实用品牌",
+    "isTop3": false,
+    "tagline": "轻量化套餐与多平台配置，适合日常网页浏览与轻度办公",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 96,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://fly.fireflyxx.cfd/#/?code=okty0PaM",
+    "networkTypes": [
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 6,
+    "optionsCount": 6,
+    "advantages": [
+      "有明确月付入口：Lite ¥25/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：Firefly 年付版一次支付¥96，其月度流量为60GB/月，便于按全年用量比较。",
+      "提供 1 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 11,
+    "displayOrder": 12,
+    "id": "quanqiuyun",
+    "name": "全球云",
+    "englishName": "QuanQiu Cloud",
+    "slug": "quanqiuyun",
+    "badge": "国际节点覆盖",
+    "isTop3": false,
+    "tagline": "国际多地区节点覆盖，多设备使用与中高档流量梯次",
+    "minMonthlyPrice": 20,
+    "minMonthlyTraffic": "120GB/月",
+    "minYearlyPrice": 99,
+    "minYearlyTraffic": "59GB/月",
+    "purchaseUrl": "https://n3oplhjnm.quanqiugttt1.club/#/?code=RZW9Z7OZ",
+    "networkTypes": [
+      "BGP智能调度",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 9,
+    "optionsCount": 17,
+    "advantages": [
+      "有明确月付入口：BGP 智能优化·入门方案 ¥20/月，额度120GB/月，可以先控制首单投入。",
+      "有年付选择：轻量版一次支付¥99，其月度流量为59GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 12,
+    "displayOrder": 13,
+    "id": "v2yun",
+    "name": "唯兔云",
+    "englishName": "V2Yun",
+    "slug": "v2yun",
+    "badge": "低预算备选",
+    "isTop3": false,
+    "tagline": "百元以内低价年付与多档轻量套餐，低预算备用连接",
+    "minMonthlyPrice": 14.9,
+    "minMonthlyTraffic": "100GB/月",
+    "minYearlyPrice": 79.9,
+    "minYearlyTraffic": "45GB/月",
+    "purchaseUrl": "https://fast.v2yunvipaff.com/#/?code=NwYl5X0J",
+    "networkTypes": [
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 10,
+    "optionsCount": 10,
+    "advantages": [
+      "有明确月付入口：节假日限时月付套餐 ¥14.9/月，额度100GB/月，可以先控制首单投入。",
+      "有年付选择：年付优惠套餐一次支付¥79.9，其月度流量为45GB/月，便于按全年用量比较。",
+      "提供 3 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅已被公告暂停，Clash/Shadowrocket及路由器类需求受到直接影响。"
+    ]
+  },
+  {
+    "rank": 13,
+    "displayOrder": 14,
+    "id": "lingmao",
+    "name": "灵猫网络",
+    "englishName": "LingMao Net",
+    "slug": "lingmao",
+    "badge": "灵活计费精选",
+    "isTop3": false,
+    "tagline": "支持新增季付 Small 套餐与不限时买断流量包，灵活周期",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 85,
+    "minYearlyTraffic": "45GB/月",
+    "purchaseUrl": "https://vip02.civetaff.com/#/?code=32HYcbmU",
+    "networkTypes": [
+      "IPLC专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：月付 Small ¥25/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：年付小包一次支付¥85，其月度流量为45GB/月，便于按全年用量比较。",
+      "提供 2 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅已被公告暂停，Clash/Shadowrocket及路由器类需求受到直接影响。"
+    ]
+  },
+  {
+    "rank": 14,
+    "displayOrder": 15,
+    "id": "flashleap",
+    "name": "闪跃",
+    "englishName": "FlashLeap",
+    "slug": "flashleap",
+    "badge": "大容量梯次",
+    "isTop3": false,
+    "tagline": "高档年付与大容量月度梯次，含一次性流量包规格说明",
+    "minMonthlyPrice": 24,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 96,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://vip02.flashleapaff.com/#/?code=UrgmVzWd",
+    "networkTypes": [
+      "IPLC专线"
+    ],
+    "protocols": [
+      "以官方配置为准"
+    ],
+    "plansCount": 8,
+    "optionsCount": 28,
+    "advantages": [
+      "有明确月付入口：闪动 Flicker ¥24/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：闪跃年付版一次支付¥96，其月度流量为60GB/月，便于按全年用量比较。",
+      "提供 2 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 15,
+    "displayOrder": 16,
+    "id": "kuajieyun",
+    "name": "跨界云",
+    "englishName": "KuaJie Cloud",
+    "slug": "kuajieyun",
+    "badge": "海量吞吐优选",
+    "isTop3": false,
+    "tagline": "大流量月付与百元年付版，最高提供 1.8TB/月海量吞吐",
+    "minMonthlyPrice": 20,
+    "minMonthlyTraffic": "120GB/月",
+    "minYearlyPrice": 96,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://vip02.kuajieaff.com/#/?code=Ip6UEBsp",
+    "networkTypes": [
+      "IPLC专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 5,
+    "optionsCount": 5,
+    "advantages": [
+      "有明确月付入口：轻云 Lite ¥20/月，额度120GB/月，可以先控制首单投入。",
+      "有年付选择：跨界年付版一次支付¥96，其月度流量为60GB/月，便于按全年用量比较。",
+      "周期分档清晰，能够根据所列 GB 额度进行用量预算。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅有额外门槛或需要客服领取，不能当成所有套餐标配。"
+    ]
+  },
+  {
+    "rank": 16,
+    "displayOrder": 17,
+    "id": "sogoyun",
+    "name": "Sogo云",
+    "englishName": "Sogo",
+    "slug": "sogoyun",
+    "badge": "长效实用品牌",
+    "isTop3": false,
+    "tagline": "多档长周期年付与一次性流量包，适配多客户端配置",
+    "minMonthlyPrice": 25,
+    "minMonthlyTraffic": "150GB/月",
+    "minYearlyPrice": 98,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://jbvfh.sogotztz2.sbs/#/?code=P18TIVWI",
+    "networkTypes": [
+      "IPLC专线",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 9,
+    "optionsCount": 9,
+    "advantages": [
+      "有明确月付入口：基础版 ¥25/月，额度150GB/月，可以先控制首单投入。",
+      "有年付选择：小包年付版一次支付¥98，其月度流量为60GB/月，便于按全年用量比较。",
+      "提供 4 款一次性总流量包，可用于不规律用量，但须留意全部成本。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  },
+  {
+    "rank": 17,
+    "displayOrder": 18,
+    "id": "u1s1",
+    "name": "有一说一",
+    "englishName": "U1S1",
+    "slug": "u1s1",
+    "badge": "亲民透明品牌",
+    "isTop3": false,
+    "tagline": "透明化套餐梯次与平价轻量月付，适合预算敏感型用户",
+    "minMonthlyPrice": 20,
+    "minMonthlyTraffic": "120GB/月",
+    "minYearlyPrice": 96,
+    "minYearlyTraffic": "60GB/月",
+    "purchaseUrl": "https://pkdj7.vipaff.cc/#/?code=Dw6wziZa",
+    "networkTypes": [
+      "BGP智能调度",
+      "IEPL专线"
+    ],
+    "protocols": [
+      "Shadowsocks",
+      "VLESS"
+    ],
+    "plansCount": 6,
+    "optionsCount": 14,
+    "advantages": [
+      "有明确月付入口：u1s1·普通人真够了包 ¥20/月，额度120GB/月，可以先控制首单投入。",
+      "有年付选择：u1s1·就是好用包一次支付¥96，其月度流量为60GB/月，便于按全年用量比较。",
+      "周期分档清晰，能够根据所列 GB 额度进行用量预算。"
+    ],
+    "limitations": [
+      "本次无法登录动态订单后台核对当日所有在售和实际结账金额；历史价格存在变动风险。",
+      "第三方订阅规则缺少覆盖所有套餐的确定承诺。"
+    ]
+  }
+]

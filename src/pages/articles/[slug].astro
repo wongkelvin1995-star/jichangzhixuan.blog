@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import articles from '../../data/articles.json';
+import brands from '../../data/brands.json';
+
+export async function getStaticPaths() {
+  return articles.map((art) => ({
+    params: { slug: art.slug },
+    props: { article: art }
+  }));
+}
+
+const { article } = Astro.props;
+
+// Related brands
+const relatedBrandObjects = (article.relatedBrands || []).map((slug: string) => 
+  brands.find((b) => b.slug === slug)
+).filter(Boolean);
+
+// Other articles
+const otherArticles = articles.filter((a) => a.slug !== article.slug).slice(0, 3);
+---
+
+<Layout
+  title={`${article.title}｜机场智选`}
+  description={article.summary}
+  canonical={`https://jichangzhixuan.blog/articles/${article.slug}/`}
+  ogType="article"
+  breadcrumbs={[
+    { name: '专题文章', url: '/articles/' },
+    { name: article.title, url: `/articles/${article.slug}/` }
+  ]}
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    'headline': article.title,
+    'description': article.summary,
+    'datePublished': article.publishedDate,
+    'dateModified': article.updatedDate,
+    'author': {
+      '@type': 'Organization',
+      'name': article.author,
+      'url': 'https://jichangzhixuan.blog/about/'
+    },
+    'publisher': {
+      '@type': 'Organization',
+      'name': '机场智选',
+      'logo': {
+        '@type': 'ImageObject',
+        'url': 'https://jichangzhixuan.blog/images/logo-icon.svg'
+      }
+    },
+    'mainEntityOfPage': {
+      '@type': 'WebPage',
+      '@id': `https://jichangzhixuan.blog/articles/${article.slug}/`
+    }
+  }}
+>
+  <!-- Article Header Hero -->
+  <header style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="article-container">
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+        <span class="badge-pill">{article.category}</span>
+        <span style="font-size: 13.5px; color: #647B8C;">预计阅读时间：{article.readTime}</span>
+      </div>
+
+      <h1 style="font-size: clamp(28px, 4vw, 44px); font-weight: 900; color: #102D46; line-height: 1.25; margin-bottom: 20px;">
+        {article.title}
+      </h1>
+
+      <div style="padding: 18px 22px; background: #E4F0F6; border-left: 4px solid #10B89A; border-radius: 0 12px 12px 0; font-size: 15.5px; color: #263E50; line-height: 1.75; margin-bottom: 24px;">
+        <strong>导语摘要：</strong> {article.summary}
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; font-size: 13.5px; color: #647B8C; border-top: 1px solid #EEF3F7; padding-top: 16px;">
+        <div>
+          <span>撰写发布：<strong>{article.author}</strong></span>
+          <span style="margin: 0 8px;">·</span>
+          <span>更新日期：{article.updatedDate}</span>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <a href="/articles/" style="color: #07886E; font-weight: 600; text-decoration: none;">← 返回专栏目录</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Article Body -->
+  <article class="article-container article-content" style="padding-top: 48px; padding-bottom: 64px;">
+    
+    <!-- Table of Contents -->
+    <div style="background: #F8FBFE; border: 1px solid #DCE7EC; border-radius: 16px; padding: 20px 24px; margin-bottom: 40px;">
+      <div style="font-size: 15px; font-weight: 800; color: #102D46; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+        <span>📑</span> 目录导航
+      </div>
+      <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14.5px;">
+        {article.sections.map((sec: any, idx: number) => (
+          <li>
+            <a href={`#section-${idx}`} style="color: #07886E; text-decoration: none;">
+              {sec.h2}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Article Sections -->
+    {article.sections.map((sec: any, idx: number) => (
+      <section id={`section-${idx}`} style="margin-bottom: 40px;">
+        <h2 style="font-size: 26px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+          {sec.h2}
+        </h2>
+        <div style="font-size: 16.5px; color: #263E50; line-height: 1.85;">
+          <p set:html={sec.p}></p>
+        </div>
+      </section>
+    ))}
+
+    <!-- Related Brands Box -->
+    {relatedBrandObjects.length > 0 && (
+      <div style="margin-top: 56px; padding: 32px; background: #F8FBFE; border: 1.5px solid #DCE7EC; border-radius: 20px;">
+        <h3 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 16px;">
+          📌 本文涉及的重点推荐机场品牌
+        </h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          {relatedBrandObjects.map((b: any) => (
+            <div class="smart-card" style="padding: 18px; background: #FFFFFF;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <strong style="font-size: 16px; color: #102D46;">{b.name}</strong>
+                <span class="badge-pill" style="font-size: 11px;">{b.badge}</span>
+              </div>
+              <div style="font-size: 13px; color: #647B8C; margin-bottom: 12px;">
+                月付：{b.minMonthlyPrice ? `¥${b.minMonthlyPrice}/月` : '无直购月付'} · 年付：{b.minYearlyPrice ? `¥${b.minYearlyPrice}/年` : '无独立年付'}
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <a href={`/airports/${b.slug}/`} class="btn-secondary" style="flex: 1; padding: 6px 10px; font-size: 12.5px; text-align: center;">
+                  查看档案
+                </a>
+                <a href={b.purchaseUrl} target="_blank" rel="sponsored nofollow noopener" class="btn-primary" style="flex: 1; padding: 6px 10px; font-size: 12.5px; text-align: center;">
+                  官网购买
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Affiliate Disclosure Notice -->
+    <div style="margin-top: 36px; padding: 18px; background: #F4F9FC; border-radius: 12px; font-size: 13px; color: #8BA0B2; line-height: 1.6;">
+      <strong>商业推广与独立评测说明：</strong> 本文为机场智选编辑部独立撰写，基于公开技术资料与真实数据库进行客观分析。文内部分品牌外链包含专属推广代码，通过其购买可能为本站带来一定的服务器维持经费，但不影响客观资料展示。
+    </div>
+
+    <!-- Related Articles -->
+    <div style="margin-top: 56px; border-top: 1px solid #DCE7EC; padding-top: 40px;">
+      <h3 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 20px;">
+        📚 延伸阅读推荐
+      </h3>
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        {otherArticles.map((oa: any) => (
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: #F8FBFE; border: 1px solid #DCE7EC; border-radius: 12px;">
+            <a href={`/articles/${oa.slug}/`} style="font-size: 15px; font-weight: 700; color: #102D46; text-decoration: none;">
+              {oa.title}
+            </a>
+            <span style="font-size: 13px; color: #647B8C; flex-shrink: 0; margin-left: 16px;">
+              {oa.readTime} →
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+  </article>
+</Layout>

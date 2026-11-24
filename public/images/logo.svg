@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" fill="none">
+  <!-- Modern Green Airplane Icon -->
+  <g transform="translate(4, 6)">
+    <!-- Aerodynamic Jet Silhouette in Emerald -->
+    <path d="M4 22L18 20L28 8L33 9L25 20L34 21.5L38 17L41 18L39 23L41 28L38 29L34 24.5L25 26L33 37L28 38L18 26L4 24C1.8 23.7 1.8 22.3 4 22Z" fill="#10B89A"/>
+    <circle cx="39" cy="23" r="1.5" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Text Group -->
+  <!-- Line 1: 机场智选 / Airport Smart Choice -->
+  <text x="56" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Noto Sans SC', sans-serif" font-size="16" font-weight="800" fill="#102D46" letter-spacing="-0.02em">
+    机场智选 <tspan font-size="13" font-weight="600" fill="#647B8C">/ Airport Smart Choice</tspan>
+  </text>
+  
+  <!-- Line 2: jichangzhixuan.blog -->
+  <text x="56" y="38" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="11" font-weight="500" fill="#8FA2B0" letter-spacing="0.04em">jichangzhixuan.blog</text>
+</svg>

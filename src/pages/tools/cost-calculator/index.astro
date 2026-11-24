@@ -1,0 +1,270 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import brands from '../../../data/brands.json';
+import options from '../../../data/options.json';
+
+const pageTitle = "机场套餐实际成本计算器｜算清每GB真实花费与闲置损失";
+const pageDesc = "打破名义单价陷阱！输入套餐价格、周期与实际使用流量，精确计算折合月均成本、名义单价与实际使用单价，拒绝为用不完的流量买单。";
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDesc}
+  canonical="https://jichangzhixuan.blog/tools/cost-calculator/"
+  breadcrumbs={[
+    { name: '智选工具', url: '/tools/' },
+    { name: '套餐成本计算器', url: '/tools/cost-calculator/' }
+  ]}
+>
+  <section style="background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%); padding: 56px 0 40px 0; border-bottom: 1px solid #DCE7EC;">
+    <div class="max-container">
+      <div style="max-width: 820px;">
+        <span class="badge-pill" style="margin-bottom: 12px;">成本透视工具</span>
+        <h1 style="font-size: clamp(32px, 4.5vw, 48px); font-weight: 900; color: #102D46; line-height: 1.2; margin-bottom: 16px;">
+          机场套餐实际使用成本计算器
+        </h1>
+        <p style="font-size: 16.5px; color: #647B8C; line-height: 1.8;">
+          “每GB只要5分钱”真的划算吗？如果每月用不完，实际每GB的真实花费可能高达数元。使用本工具，立即还原任何套餐的真实经济账。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-gap" style="background: #FFFFFF;">
+    <div class="max-container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; align-items: start;">
+        
+        <!-- Input Form -->
+        <div class="smart-card" style="padding: 32px; background: #F8FBFE; border: 1.5px solid #DCE7EC;">
+          <h2 style="font-size: 20px; font-weight: 800; color: #102D46; margin-bottom: 24px;">
+            💰 输入套餐与使用参数
+          </h2>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- Quick Preset Selector from Real Database -->
+            <div>
+              <label style="display: block; font-size: 13.5px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                从真实数据库快速载入代表套餐（可选）：
+              </label>
+              <select id="preset-selector" style="width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14px;">
+                <option value="">-- 手动输入或选择预设 --</option>
+                <option value="ldy_month">灵动云 · 灵动·拂风 (¥20/月，100GB)</option>
+                <option value="ldy_year">灵动云 · 灵动·穿云 (¥99/年，70GB/30天)</option>
+                <option value="tw_month">暮光加速 · 入门月付 (¥20/月，120GB)</option>
+                <option value="tw_year">暮光加速 · 轻量年付 (¥109/年，70GB/月)</option>
+                <option value="bz_month">微风网络 · 平价月付 (¥25/月，200GB)</option>
+                <option value="bz_year">微风网络 · 轻量年付 (¥137/年，100GB/月)</option>
+                <option value="dly_year">大佬云 · 年付活动包 (¥96/年，60GB/月)</option>
+              </select>
+            </div>
+
+            <!-- Total Price -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                整期实付金额 (元)
+              </label>
+              <input id="input-price" type="number" min="1" step="0.01" value="20" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <!-- Billing Cycle / Months -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                付款周期
+              </label>
+              <select id="input-months" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 14.5px;">
+                <option value="1" selected>月付 (1个月)</option>
+                <option value="3">季付 (3个月)</option>
+                <option value="6">半年付 (6个月)</option>
+                <option value="12">年付 (12个月)</option>
+                <option value="24">两年付 (24个月)</option>
+                <option value="36">三年付 (36个月)</option>
+                <option value="0">一次性不限时包 (买断制)</option>
+              </select>
+            </div>
+
+            <!-- Plan Traffic -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                套餐额度 (GB)
+              </label>
+              <input id="input-plan-traffic" type="number" min="1" step="1" value="100" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+              <div style="font-size: 12px; color: #8BA0B2; margin-top: 4px;">周期套餐填每月配额；一次性包填总流量</div>
+            </div>
+
+            <!-- Actual Expected Usage -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                预计每月实际消耗流量 (GB)
+              </label>
+              <input id="input-actual-traffic" type="number" min="1" step="1" value="40" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+            <!-- Coupon discount -->
+            <div>
+              <label style="display: block; font-size: 14px; font-weight: 700; color: #263E50; margin-bottom: 6px;">
+                优惠券折扣 (可选，如 8 折填 0.8，无优惠填 1.0)
+              </label>
+              <input id="input-discount" type="number" min="0.1" max="1" step="0.05" value="1.0" style="width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid #DCE7EC; background: #FFFFFF; font-size: 15px;" />
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Result Card -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+          
+          <div class="smart-card" style="padding: 32px; background: #102D46; color: #FFFFFF;">
+            <span style="font-size: 12px; font-weight: 700; color: #10B89A; letter-spacing: 0.08em; text-transform: uppercase;">
+              COST TRANSPARENCY
+            </span>
+            <h3 style="font-size: 22px; font-weight: 800; color: #FFFFFF; margin-top: 4px; margin-bottom: 24px;">
+              核算透视结果
+            </h3>
+
+            <!-- Key metrics grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px;">
+              
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">折合月均成本</div>
+                <div id="res-monthly-cost" style="font-size: 26px; font-weight: 900; color: #FFFFFF; margin-top: 4px;">
+                  ¥0.00
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">折后总实付</div>
+                <div id="res-discounted-total" style="font-size: 26px; font-weight: 900; color: #10B89A; margin-top: 4px;">
+                  ¥0.00
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #A4B8C7;">名义单价 (全部用完)</div>
+                <div id="res-nominal-unit" style="font-size: 22px; font-weight: 800; color: #E4F0F6; margin-top: 4px;">
+                  ¥0.00 / GB
+                </div>
+              </div>
+
+              <div style="background: rgba(255, 255, 255, 0.06); padding: 16px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1);">
+                <div style="font-size: 12.5px; color: #10B89A; font-weight: 700;">实际使用单价 (真实消耗)</div>
+                <div id="res-actual-unit" style="font-size: 22px; font-weight: 900; color: #10B89A; margin-top: 4px;">
+                  ¥0.00 / GB
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Warning or Advice box -->
+            <div id="warning-box" style="display: none; background: #C53030; color: #FFFFFF; padding: 14px 18px; border-radius: 12px; font-size: 14px; margin-bottom: 20px; line-height: 1.5;">
+              ⚠ <strong>流量不足警告：</strong> 您的预计使用量已超出套餐额度，该套餐无法满足您的月度需求！
+            </div>
+
+            <div id="advice-box" style="background: rgba(255, 255, 255, 0.08); padding: 16px; border-radius: 12px; font-size: 14px; color: #DCE7EC; line-height: 1.6;">
+              计算详情：月均成本 = 实付 ÷ 月数；实际成本 = 月均成本 ÷ 实际使用量。
+            </div>
+
+          </div>
+
+          <!-- Rationality Note -->
+          <div class="smart-card" style="padding: 24px; background: #FFFFFF;">
+            <h4 style="font-size: 16px; font-weight: 800; color: #102D46; margin-bottom: 10px;">
+              💡 智选法则：为什么名义单价会误导你？
+            </h4>
+            <p style="font-size: 14px; color: #647B8C; line-height: 1.7;">
+              商家常常宣传“1000GB只要¥50，每GB只要5分钱”。但若你每月只用 50GB，那么你实际是花了 ¥50 买了 50GB，<strong>真实的每GB成本是 ¥1.00，比宣传贵了足足 20 倍！</strong> 剩下的 950GB 到期全部清零。理性的决策永远是买刚好够用的档位，而不是看似便宜的大包。
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const priceInput = document.getElementById('input-price');
+    const monthsInput = document.getElementById('input-months');
+    const planTrafficInput = document.getElementById('input-plan-traffic');
+    const actualTrafficInput = document.getElementById('input-actual-traffic');
+    const discountInput = document.getElementById('input-discount');
+    const presetSelector = document.getElementById('preset-selector');
+
+    const resMonthly = document.getElementById('res-monthly-cost');
+    const resTotal = document.getElementById('res-discounted-total');
+    const resNominal = document.getElementById('res-nominal-unit');
+    const resActual = document.getElementById('res-actual-unit');
+    const warningBox = document.getElementById('warning-box');
+    const adviceBox = document.getElementById('advice-box');
+
+    const presets = {
+      ldy_month: { price: 20, months: 1, planT: 100, actT: 50 },
+      ldy_year: { price: 99, months: 12, planT: 70, actT: 40 },
+      tw_month: { price: 20, months: 1, planT: 120, actT: 60 },
+      tw_year: { price: 109, months: 12, planT: 70, actT: 40 },
+      bz_month: { price: 25, months: 1, planT: 200, actT: 80 },
+      bz_year: { price: 137, months: 12, planT: 100, actT: 50 },
+      dly_year: { price: 96, months: 12, planT: 60, actT: 35 }
+    };
+
+    presetSelector.addEventListener('change', () => {
+      const p = presets[presetSelector.value];
+      if (p) {
+        priceInput.value = p.price;
+        monthsInput.value = p.months;
+        planTrafficInput.value = p.planT;
+        actualTrafficInput.value = p.actT;
+        calcCost();
+      }
+    });
+
+    function calcCost() {
+      const rawPrice = parseFloat(priceInput.value) || 0;
+      const months = parseInt(monthsInput.value);
+      const planTraffic = parseFloat(planTrafficInput.value) || 1;
+      const actualTraffic = parseFloat(actualTrafficInput.value) || 1;
+      const discount = parseFloat(discountInput.value) || 1.0;
+
+      const discountedPrice = Number((rawPrice * discount).toFixed(2));
+      resTotal.textContent = `¥${discountedPrice}`;
+
+      if (months === 0) {
+        // One-time package
+        resMonthly.textContent = '买断制';
+        const unit = Number((discountedPrice / planTraffic).toFixed(4));
+        resNominal.textContent = `¥${unit} / GB`;
+        resActual.textContent = `¥${unit} / GB (用完为止)`;
+        warningBox.style.display = 'none';
+        adviceBox.textContent = `该套餐为一次性买断流量包，不按月清零，流量用完为止。单位成本为 ¥${unit}/GB。`;
+        return;
+      }
+
+      // Periodic package
+      const monthlyCost = Number((discountedPrice / months).toFixed(2));
+      resMonthly.textContent = `¥${monthlyCost} / 月`;
+
+      const nominalUnit = Number((monthlyCost / planTraffic).toFixed(4));
+      resNominal.textContent = `¥${nominalUnit} / GB`;
+
+      if (actualTraffic > planTraffic) {
+        warningBox.style.display = 'block';
+        resActual.textContent = '流量已透支';
+        adviceBox.textContent = `注意：您的实际月度使用量 (${actualTraffic}GB) 超过了套餐配额 (${planTraffic}GB)。请升级更高流量档位。`;
+      } else {
+        warningBox.style.display = 'none';
+        const actualUnit = Number((monthlyCost / actualTraffic).toFixed(4));
+        resActual.textContent = `¥${actualUnit} / GB`;
+
+        const wasteGB = planTraffic - actualTraffic;
+        const wasteMoney = Number((wasteGB * nominalUnit).toFixed(2));
+        adviceBox.textContent = `您每月预计闲置 ${wasteGB}GB 流量，折合每月约有 ¥${wasteMoney} 资金未被充分利用。流量实际利用率为 ${Math.round((actualTraffic / planTraffic) * 100)}%。`;
+      }
+    }
+
+    [priceInput, monthsInput, planTrafficInput, actualTrafficInput, discountInput].forEach(el => {
+      el.addEventListener('input', calcCost);
+    });
+
+    calcCost();
+  </script>
+</Layout>
